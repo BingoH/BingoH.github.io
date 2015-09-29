@@ -1,0 +1,710 @@
+<!doctype html>
+<html class="theme-next use-motion theme-next-mist">
+<head>
+  
+
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+
+
+
+  <link href='//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+
+
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.5.1"/>
+
+
+    <meta name="description" content="Bingo.H's blog" />
+
+
+
+  <meta name="keywords" content="automata,coursera," />
+
+
+
+
+
+  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.1" />
+
+
+<meta name="description" content="上个学期修了计算理论课程，但结果没有去上过几次课，最后勉强没有挂科。但实际上，计算理论是CS之所以能成为科学的重要基础，也是CS中非常有趣的部分。因此选了Coursera的Automata课程，由Stanford的Jeff Ullman教授讲课。教授自然是大神，传说中的龙书（《编译原理》）的作者，当然半路出家的我并没有拜读过，不过封面真是赞啊。
+What’s in this course
+Regu">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Notes on Automata - Week 1">
+<meta property="og:url" content="https://bingoh.github.io/2014/09/08/Notes-on-Automata-Course/index.html">
+<meta property="og:site_name" content="Bingo.H's blog">
+<meta property="og:description" content="上个学期修了计算理论课程，但结果没有去上过几次课，最后勉强没有挂科。但实际上，计算理论是CS之所以能成为科学的重要基础，也是CS中非常有趣的部分。因此选了Coursera的Automata课程，由Stanford的Jeff Ullman教授讲课。教授自然是大神，传说中的龙书（《编译原理》）的作者，当然半路出家的我并没有拜读过，不过封面真是赞啊。
+What’s in this course
+Regu">
+<meta property="og:updated_time" content="2015-09-28T16:52:42.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Notes on Automata - Week 1">
+<meta name="twitter:description" content="上个学期修了计算理论课程，但结果没有去上过几次课，最后勉强没有挂科。但实际上，计算理论是CS之所以能成为科学的重要基础，也是CS中非常有趣的部分。因此选了Coursera的Automata课程，由Stanford的Jeff Ullman教授讲课。教授自然是大神，传说中的龙书（《编译原理》）的作者，当然半路出家的我并没有拜读过，不过封面真是赞啊。
+What’s in this course
+Regu">
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: 'post'
+  };
+</script>
+
+  <title> Notes on Automata - Week 1 | Bingo.H's blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  <!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+  
+
+
+
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><h1 class="site-meta">
+  <span class="logo-line-before"><i></i></span>
+  <a href="/" class="brand" rel="start">
+      <span class="logo">
+        <i class="icon-next-logo"></i>
+      </span>
+      <span class="site-title">Bingo.H's blog</span>
+  </a>
+  <span class="logo-line-after"><i></i></span>
+</h1>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            <i class="menu-item-icon icon-next-home"></i> <br />
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            <i class="menu-item-icon icon-next-archives"></i> <br />
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            <i class="menu-item-icon icon-next-tags"></i> <br />
+            Tags
+          </a>
+        </li>
+      
+
+      
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content"> 
+
+  <div id="posts" class="posts-expand">
+    
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              Notes on Automata - Week 1
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          Posted on
+          <time itemprop="dateCreated" datetime="2014-09-08T01:19:41+08:00" content="2014-09-08">
+            2014-09-08
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; In
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <a href="/categories/Programming/" itemprop="url" rel="index">
+                  <span itemprop="name">Programming</span>
+                </a>
+              </span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <span itemprop="articleBody"><p>上个学期修了计算理论课程，但结果没有去上过几次课，最后勉强没有挂科。但实际上，计算理论是CS之所以能成为科学的重要基础，也是CS中非常有趣的部分。因此选了<a href="https://www.coursera.org/" target="_blank" rel="external">Coursera</a>的<a href="https://class.coursera.org/automata" target="_blank" rel="external">Automata</a>课程，由Stanford的<a href="http://infolab.stanford.edu/~ullman/" target="_blank" rel="external">Jeff Ullman</a>教授讲课。教授自然是大神，传说中的<a href="http://book.douban.com/subject/1134994/" target="_blank" rel="external">龙书</a>（《编译原理》）的作者，当然半路出家的我并没有拜读过，不过封面真是赞啊。</p>
+<h2 id="What’s_in_this_course">What’s in this course</h2><ul>
+<li>Regular languages and their descriptors<ul>
+<li>Finite Automata, nondeterministic finite automata, regular expressions</li>
+<li>Algorithms to decide questions about regular languages, e.g., is it empty?</li>
+<li>Closure properties of regular languages</li>
+</ul>
+</li>
+<li>Context-free languages and their descriptors<ul>
+<li>Context-free grammars, pushdown automata</li>
+<li>Decisions and closure properties</li>
+</ul>
+</li>
+<li>Recursive and recursively enumerable languages<ul>
+<li>Turing machines, deciability of problems</li>
+<li>The limit of what can be computed</li>
+</ul>
+</li>
+<li>Intractable problems<ul>
+<li>Problems that (appear to) require exponential time</li>
+<li>NP-completeness and beyond</li>
+</ul>
+</li>
+</ul>
+<p>PS: Ullman教授提到了这样的事实： <strong>A survey of Stanford grads 5 years out asked which of their courses did they use in their job.</strong></p>
+<ul>
+<li>Basics like intro-programming took the top spots, of course.</li>
+<li>But among optional courses, CS154 (Automata and Complexity Theory) stood remarkably high.</li>
+</ul>
+<a id="more"></a>
+<h2 id="Week_1_Snippets_–_Introduction_to_Finite_Automata">Week 1 Snippets – Introduction to Finite Automata</h2><h3 id="Introduction">Introduction</h3><p><strong>What is a Finite Automaton</strong></p>
+<ul>
+<li>A formal system</li>
+<li>Remembers only a finite amount of information</li>
+<li>Information represented by its <strong>state</strong></li>
+<li>State changes in response to <strong>input</strong></li>
+<li>Rules that tell how the state changes in response to inputs are called <strong>transitions</strong></li>
+</ul>
+<p><strong>An Example</strong><br>A Tennis consists of 3-5 sets, each of which contains 6 or more games. To score a game, one player serves throughout. To win, you must score at least 4 points. Meanwhile, you must win by at least 2 points.<br>Suppose the inputs are s = “server wins points” and o = “opponent wins points”. Then all states and transitions can be represented as follow graph.<br><!--<img src="http://blog-bingh.qiniudn.com/images/automata/tennis.png”&gt;</img>!–&gt;<br><img src="/images/automata/tennis.png" alt=""><br>The game starts from state “Love”, and ends when either server or opponent wins, which represents <strong>end states</strong>. The automaton accepts strings which a winner is decided. If neither player can lead by 2 points, the game would transform back and forth between “deuce” and “Ad-in” or “Ad-out”. By the way, the Isner–Mahut match at the 2010 Wimbledon Championships holds the record for the <a href="http://en.wikipedia.org/wiki/Longest_tennis_match_records">longest tennis match</a>, which lasts for 11 hours, 5 minutes, in 3 days, with the final score 70-68. I happens to watch the news at that time, and how time flies.</p>
+<p><strong>Language of an Automaton</strong></p>
+<ul>
+<li>The set of strings accepted by an automaton A is the <strong>language</strong> of A. Denoted as L(A).</li>
+<li>Different set of final states =&gt; different languages.</li>
+<li>Example: As designed, L(Tennis) = strings that determine the winner.</li>
+</ul>
+<h3 id="Deterministic_Finite_Automata">Deterministic Finite Automata</h3><p><strong>Alphabets, Strings, Languages</strong></p>
+<ul>
+<li>An <strong>alphabet</strong> is any finite set of symbols, e.g. {0, 1}.</li>
+<li>A <strong>String</strong> over an alphabet $\Sigma$ is a list, each element of which is a member of $\Sigma$, e.g. 01001, $\epsilon$ (empty string).</li>
+<li>A <strong>Language</strong> is a subset of $\Sigma^*$ (set of all strings) for alphabet $\Sigma$.</li>
+</ul>
+<p><strong>DFA</strong><br>A formalism for defining languages, consists of</p>
+<ol>
+<li>A finite set of <strong>states</strong>, $Q$</li>
+<li>An <strong>input alphabet</strong>, $\Sigma$</li>
+<li>A <strong>transition function</strong>, $\delta$</li>
+<li>A <strong>start state</strong>, $q_0$</li>
+<li>A set of <strong>final state</strong>, $F$<br>Where the transition function $\delta$ takes a state $q$ and an input symbol $a$, and output the state that the DFA goes to when $q$ and $a$ received. A DFA can also be represented as graph, and transition table.</li>
+</ol>
+<p><strong>Language of DFA</strong></p>
+<ul>
+<li>Automaton of all kinds defines languages</li>
+<li>$L(A)$ is the set of strings labeling paths from the start state to a final state, or formally<br>$$<br>L(A) = \{w | \, \delta(q_0, w) \in F\}<br>$$<br>The transition function on string $w = xa, \, a \in Q$ can be computed recursively,<br>$$<br>\delta(q_0, w) = \delta(\delta(q_0, x), a)<br>$$</li>
+</ul>
+<p><strong>Regular Language</strong><br>A language $L$ is <strong>regular</strong> if it is the language accepted by some DFA. Unfortunately, there exists non-regular languages, for example, $L_1 = \{0^n1^n | \, n \geq 1\}$.</p>
+<h3 id="Nondeterministic_Finite_Automata">Nondeterministic Finite Automata</h3><p>A <strong>nondeterministic finite automata</strong> has the ability to be in serval states at once, which means transitions from a state on an input symbol can be to any set of states. The NFA also start in one start state, and accept a string if <strong>any sequence of choices of transitions</strong> leads to a final state. The intuition is that the NFA always “guesses right”. Formally, an NFA is</p>
+<ol>
+<li>A finite set of states, $Q$</li>
+<li>An input alphabet, $\Sigma$</li>
+<li>An transition function, $\delta$</li>
+<li>A start state in $Q$, typically $q_0$</li>
+<li>A set of final states $F \subset Q$</li>
+</ol>
+<p>Now, $\delta(q, a)$ is a set of states, contains all the states the NFA can go to, when in state $q$ and symbol $a$ received. The extended transition $\delta(q_0, xa) = \cup \delta(p, a),\, p \in \delta(q_0, x)$, with the basis $\delta(q_0, \epsilon) = \{q_0\}$.</p>
+<p><strong>Equivalence of NFA and DFA</strong><br>It seems that NFA can represent more languages, since a NFA now can go to multiple states by one step. But it turns out surprisely that <strong>for any DFA, there is a DFA accepts the same languages</strong>. The contraverse is obvious, thus DFAs and NFAs represents the same kind of languages, regular language.<br>Proof Sketch: For a NFA $(Q, \Sigma, \delta_N, q_0, F)$, construct the equivalent DFA using <strong>subset construction</strong> with</p>
+<ul>
+<li>States: $2^Q$ (each state is a subset of $Q$)</li>
+<li>Inputs: $\Sigma$</li>
+<li>Start states: $\{q_0\}$</li>
+<li>Final states = all those (subset of $Q$) contains a member of $F$</li>
+<li>Transition function $\delta_D(\{q_1, \ldots, q_k\}, a) = \cup \delta_N(q_i, a), \, i = 1, \ldots, k$.<br>Then the NFA and DFA accepts the same language. It can be proved by induction on $|w|$ that $\delta_N(q_0, w) = \delta_D(q_0, w)$, thus the NFA and DFA accepts the same strings.</li>
+</ul>
+<h3 id="NFA_with_$\epsilon$-Transitions">NFA with $\epsilon$-Transitions</h3><p>We can even allow state-to-state transition on $\epsilon$ input, these transitions are done spontaneously, without looking at the input string. Again, the extension only accepts regular language. It can be proved that for any $\epsilon$-NFA, there is a NFA which accepts the same language. The intuition is that we can combine the $\epsilon$-transitions with the next transition on real input. And the prove is also completed with induction.<br><!--<img src="http://blog-bingh.qiniudn.com/images/automata/epsilon_nfa.png”&gt;</img>!–&gt;<br><img src="/images/automat/epsilon_nfa.png" alt=""></p>
+<h3 id="Remark">Remark</h3><ul>
+<li>Not so obviously, the DFA, NFA, $\epsilon$-NFA accepts exactly the same class of languages: the regular language, although the last two seem to be more powerful. It seems that regular languages is a boundary for finite automatas, which has no memory to remember previous states and symbols, and only finite states available.</li>
+<li>The NFA types are easier design, and may have exponential fewer states than a equivalent DFA (see subset construction).</li>
+<li>Only a DFA can be implemented until now.</li>
+</ul>
+--></p></span>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/automata/" rel="tag">#automata</a>
+          
+            <a href="/tags/coursera/" rel="tag">#coursera</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2014/09/19/Notes-on-Automata-Course--Week-2/" rel="prev">Notes on Automata - Week 2</a>
+            
+          </div>
+
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2014/08/21/Writting-in-Markdown/" rel="next">Writing in Markdown</a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+ </div>
+
+        
+
+        
+          <div class="comments" id="comments">
+            
+          </div>
+        
+      </div>
+
+      
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table Of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="/images/default_avatar.jpg" alt="Bingo.H" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">Bingo.H</p>
+        </div>
+        <p class="site-description motion-element" itemprop="description">Bingo.H's blog</p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">5</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            
+              <span class="site-state-item-count">3</span>
+              <span class="site-state-item-name">categories</span>
+              
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">6</span>
+              <span class="site-state-item-name">tags</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#What’s_in_this_course"><span class="nav-number">1.</span> <span class="nav-text">What’s in this course</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Week_1_Snippets_–_Introduction_to_Finite_Automata"><span class="nav-number">2.</span> <span class="nav-text">Week 1 Snippets – Introduction to Finite Automata</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Introduction"><span class="nav-number">2.1.</span> <span class="nav-text">Introduction</span></a></li></ol></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner"> <div class="copyright" >
+  
+  &copy; &nbsp; 
+  <span itemprop="copyrightYear">2015</span>
+  <span class="with-love">
+    <i class="icon-next-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Bingo.H</span>
+</div>
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="http://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+ </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+  
+    
+    
+
+  
+
+
+  
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.1"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.1"></script>
+  
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/js/motion_global.js?v=0.4.5.1" id="motion.global"></script>
+
+
+
+
+  <script type="text/javascript" src="/js/nav-toggle.js?v=0.4.5.1"></script>
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.5.1" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 0.4 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    var $tocContent = $('.post-toc-content');
+    if (isDesktop() && CONFIG.sidebar === 'post') {
+      if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+        displaySidebar();
+      }
+    }
+  });
+</script>
+
+
+
+  <script type="text/javascript">
+    $(document).ready(function () {
+      if (CONFIG.sidebar === 'always') {
+        displaySidebar();
+      }
+      if (isMobile()) {
+        FastClick.attach(document.body);
+      }
+    });
+  </script>
+
+  
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/lazyload.js"></script>
+  <script type="text/javascript">
+    $(function () {
+      $("#posts").find('img').lazyload({
+        placeholder: "/images/loading.gif",
+        effect: "fadeIn"
+      });
+    });
+  </script>
+</body>
+</html>

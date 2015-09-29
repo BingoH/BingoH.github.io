@@ -1,0 +1,678 @@
+<!doctype html>
+<html class="theme-next use-motion theme-next-mist">
+<head>
+  
+
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+
+
+
+  <link href='//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+
+
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.5.1"/>
+
+
+    <meta name="description" content="Bingo.H's blog" />
+
+
+
+  <meta name="keywords" content="automata,coursera," />
+
+
+
+
+
+  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.1" />
+
+
+<meta name="description" content="In week 2 of Automata Course, regular expressions are introduced, along with some applications of regular expressions. Not surprisely, the regular expressions describe exactly the regular languages, t">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Notes on Automata - Week 2">
+<meta property="og:url" content="https://bingoh.github.io/2014/09/19/Notes-on-Automata-Course--Week-2/index.html">
+<meta property="og:site_name" content="Bingo.H's blog">
+<meta property="og:description" content="In week 2 of Automata Course, regular expressions are introduced, along with some applications of regular expressions. Not surprisely, the regular expressions describe exactly the regular languages, t">
+<meta property="og:image" content="http://blog-bingh.qiniudn.com/images/automata/re2nfa_1.png">
+<meta property="og:image" content="http://blog-bingh.qiniudn.com/images/automata/re2nfa_2.png">
+<meta property="og:image" content="http://blog-bingh.qiniudn.com/images/automata/re2nfa_3.png">
+<meta property="og:image" content="http://blog-bingh.qiniudn.com/images/automata/re2nfa_4.png">
+<meta property="og:updated_time" content="2015-09-28T16:41:29.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Notes on Automata - Week 2">
+<meta name="twitter:description" content="In week 2 of Automata Course, regular expressions are introduced, along with some applications of regular expressions. Not surprisely, the regular expressions describe exactly the regular languages, t">
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: 'post'
+  };
+</script>
+
+  <title> Notes on Automata - Week 2 | Bingo.H's blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  <!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+  
+
+
+
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><h1 class="site-meta">
+  <span class="logo-line-before"><i></i></span>
+  <a href="/" class="brand" rel="start">
+      <span class="logo">
+        <i class="icon-next-logo"></i>
+      </span>
+      <span class="site-title">Bingo.H's blog</span>
+  </a>
+  <span class="logo-line-after"><i></i></span>
+</h1>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            <i class="menu-item-icon icon-next-home"></i> <br />
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            <i class="menu-item-icon icon-next-archives"></i> <br />
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            <i class="menu-item-icon icon-next-tags"></i> <br />
+            Tags
+          </a>
+        </li>
+      
+
+      
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content"> 
+
+  <div id="posts" class="posts-expand">
+    
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              Notes on Automata - Week 2
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          Posted on
+          <time itemprop="dateCreated" datetime="2014-09-19T00:59:29+08:00" content="2014-09-19">
+            2014-09-19
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; In
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <a href="/categories/Programming/" itemprop="url" rel="index">
+                  <span itemprop="name">Programming</span>
+                </a>
+              </span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <span itemprop="articleBody"><p>In week 2 of <a href="https://class.coursera.org/automata" target="_blank" rel="external">Automata Course</a>, regular expressions are introduced, along with some applications of regular expressions. Not surprisely, the regular expressions describe exactly the regular languages, the same as Finite Automatas. Also, the properties of regular languages are introduced, including decisions properties and closure properties. The latter indicates that the regular class is closed under operations such as union, intersection, difference, etc, while a decision property for a class of languages is an algorithm that takes a formal description of a language (e.g., DFA) and tells whether or not some property holds. In particular, the pumping lemma is useful to tell whether a language is regular or not.</p>
+<a id="more"></a>
+<h2 id="Week_2_Snippets_–_Regular_Expression_and_Properties_of_Regular_Languages">Week 2 Snippets – Regular Expression and Properties of Regular Languages</h2><h3 id="Regular_Expressions">Regular Expressions</h3><p><strong>Regular Expressions</strong> describe languages by an algebra. If $E$ is a regular expression, then $L(E)$ is the language it defines. The RE’s and their languages are defined recursively.<br>There are three basic operations performed on languages, union, concatenation and Kleene star. For language $L$ and $L’$, the union is the usual thing, since languages are sets. And the concatenation contains every string contanated by strings from $L$ and $L’$, which means $LL’ = \{wx| w \in L, \, x \in L’ \}$. The Kleene star of $L$ concatenates zero or more strings from $L$, or formally $L^* = \{\epsilon\} \cup L \cup LL \cup \ldots$. The RE’s definition is as follows: </p>
+<ul>
+<li>Basis<ul>
+<li>If $a$ is any symbol, than $\bf{a}$ is a RE, and $L(\bf{a}) = \{a\}$</li>
+<li>$\bf{\epsilon}$ is a RE, and $L(\bf{\epsilon}) = \{\bf{\epsilon}\}$</li>
+<li>$\phi$ is a RE, and $L(\Phi) = \phi$</li>
+</ul>
+</li>
+<li>Induction<ul>
+<li>If $E_1$ and $E_2$ is RE, then $E_1 + E_2$ is a RE, and $L(E_1+E_2) = L(E_1)\cup L(E_2)$</li>
+<li>If $E_1$ and $E_2$ is RE, then $E_1E_2$ is a RE, and $L(E_1E_2) = L(E_1)L(E_2)$</li>
+<li>If $E$ is a RE, then $E^*$ is a RE, and $L(E^*) = (L(E))^*$</li>
+</ul>
+</li>
+</ul>
+<p>Actually, the all RE’s defined on an alphabet consist an <strong>algebra</strong>. The plus operation is union, and multiply operation is concatenation. The $\phi$ is identity for plus, $\epsilon$ is identity for multiply, and $\phi$ is annihilator for multiply.<br>It can be proved that <strong>RE and Finite Automata are equivalent</strong>. For each RE, we construct a $\epsilon$-NFA that accepts the same language as below.</p>
+<table border="0" height="150"> <tr> <th><img src="http://blog-bingh.qiniudn.com/images/automata/re2nfa_1.png"></th> <th><img src="http://blog-bingh.qiniudn.com/images/automata/re2nfa_2.png"></th> <th><img src="http://blog-bingh.qiniudn.com/images/automata/re2nfa_3.png"></th> <th><img src="http://blog-bingh.qiniudn.com/images/automata/re2nfa_4.png"></th> </tr> </table>
+
+<p>Also a finite automata (DFA) can be converted to an equivalent RE.<br><strong>Proof Sketch</strong>: Suppose states of the DFA are named $1, 2, \ldots, n$, we define a $k$-path as a path through the graph of the DFA that goes <strong>through</strong> no state numbered higher than $k$, then the union of RE’s for the $n$-paths from the start state to each final state is a RE which is equivalent to the DFA.</p>
+<h3 id="Decision_Properties_of_Regular_Languages">Decision Properties of Regular Languages</h3><p>A <strong>language class</strong> is a set of languages, a <strong>decision property</strong> for a class of languages is an algorithm that takes a formal description of a language (e.g., DFA) and tells whether or not some property holds. We might want a “smallest” representation for a language, e.g., a minimum-state DFA or a shortest RE. Then we have to be able to decide “Are these two languages the same?”. Some examples are listed below,</p>
+<ul>
+<li>The Membership Problem: “Is string $w$ in regular language $L$?”. Suppose $L$ is represented by a DFA $A$, then we can simulate the action of $A$ on the sequence of input symbols forming $w$.</li>
+<li>The Emptiness Problem: “Given a regular language, does the language contain any string at all?” Assume representation is DFA, then the set of states reachable from the start state can be computed, if at least one final state is reachable, then yes, else no.</li>
+<li>The Infiniteness Problem: “Is a given regular language infinite?” The conclusion is that we can test for membership all strings of length between $n$ and $2n-1$ ($n$ is number of states), if any are accepted, then infinite, else finite. This follows from the key idea that if the language contains any string of length $n$ or more, then the language is infinite, otherwise the language is finite and that if there is a string of length $\geq n$ in $L$ (the DFA representation), then there is a string of length between $n$ and $2n-1$. The former is intuitive, since there must be a state that appear twice on the path labeled $w$ from start state to final state, where $w$ is a string with length $\geq n$. The latter follows from that we can shorten the string by remove the cycles on the path.<br>However, it’s terrible to test all $n^{|alphabet|}$ strings. As an alternative, we can find cycles between the start and a final state.<ul>
+<li>Eliminate states not reachable from the start state</li>
+<li>Eliminate states that do not reach a final state</li>
+<li>Test if the remaining transition grph has any cycles.</li>
+</ul>
+</li>
+<li>Equivalence: “Given regular languages $L$ and $M$, is $L=M$?” Algorithm involves constructing the <strong>product DFA</strong> from DFA of $L$ and $M$. Let these DFA’s have sets of states $Q$ and $R$, respectively, product DFA has set of states $Q\times R$, start state $[q_0, r_0]$, and transitions $\delta([q, r], a)=[\delta_L(q, a), \delta_M(r, a)]$. The final states of the product DFA are those states such that exactly one of $q$ and $r$ is a final state of its own DFA. Thus, the product DFA accepts $w$ iff $w$ is in exactly one of $L$ and $M$ and $L=M$ if and only if the product automaton’s language is empty.</li>
+<li>Containment: “Given regular languages $L$ and $M$, is $L \subset M$?” The algorithm also uses the product DFA, except that the $[q, r]$ is a final state iff $q$ is final and $r$ is not.</li>
+</ul>
+<h4 id="The_Pumping_Lemma">The Pumping Lemma</h4><p>In the infiniteness problem, we have, almost accidentally, proved a statement that is quite useful for showing certain languages are not regular, which is called as <strong>the pumping lemma for regular language</strong>.</p>
+<blockquote>
+<p>For every regular language $L$, there is an integer $n$, such that for every string $w$ in $L$ of length $\geq n$, we can write write $w=xyz$ such that $|xy| \leq n, |y| &gt; 0$ and for all $i\geq 0, xy^iz$ is in $L$.</p>
+</blockquote>
+<p>Examples: $\{0^k1^k|\, k\geq 1\}$ is not a regular language.<br><strong>Proof Sketch</strong>:Suppose it were, then there would be an associated $n$ for pumping lemma, let $w=0^n1^n$, we can write $w=xyz$, where $x$ and $y$ consists of 0’s, and $y\neq \epsilon$, but then $xyyz$ would be in $L$, and this string contains more 0’s than 1’s.</p>
+<h4 id="The_Minimum-State_DFA_for_a_Regular_Language">The Minimum-State DFA for a Regular Language</h4><p>Naturally, we may want to construct “smallest” representation for a regular language, either with minimum-state DFA or shortest RE. In principle, since we can test equivalence of DFA, we can find the DFA with the fewest states that accepts the same regular language. That’s a rather terrible algorithm. The efficient algorithm is listed as follows,</p>
+<ul>
+<li>Construct a table with all pairs of states, mark pairs with exactly one final state,</li>
+<li>Mark $[q, r]$ if for some input symbol $a$, $[\delta(q, a), \delta(r, a)]$ is marked,</li>
+<li>After no more marks are possible, the unmarked pairs are equivalent and can be merged into one state,</li>
+<li>Before or after the previous steps, remove states that are not reachable from the start state.</li>
+</ul>
+<p>The detailed proof can be found in the slides. The intuition is that we can divide the states of DFA into equivalent components, which is determined by the <strong>indistinguishable</strong> relation, and then replace each of these components with a single state. State $p$ is indistinguishable from state $q$ if the following two properties hold,</p>
+<ul>
+<li>Both of $p$ and $q$ are final states or both of $p$ and $q$ are not final states</li>
+<li>For any symbol $a$, $p$ and $q$ transite to indistinguishable states.</li>
+</ul>
+<p>The algorithm recursively marks <strong>distinguishable</strong> states, and replaces <strong>indistinguishable</strong> states with a single state. It can be proved that resulting DFA has fewest states. Suppose $A$ is the resulting DFA, and there exists another smaller equivalent DFA $B$, consider an automaton with the states of $A$ and $B$ combined. Then every state of $A$ is indistinguishable from some state of $B$, which means $B$ has at least as many states as $A$.</p>
+<h3 id="Closure_Properties_of_Regular_Languages">Closure Properties of Regular Languages</h3><p>The regular language class is closed under union, concatenation, Kleene star, intersection, difference, complementation, reversal, homomorphism and inverse homomorphism. In other words, if $L$ and $M$ are regular languages, so is $L\cup M$, $L\cap M$, $L-M$, $L^*$, $LM$, $\Sigma^* - L$.</p>
+<ul>
+<li>Reversal: The reversal of $L$ consists of reversal of every string in $L$. The proof is completed by provide a regular expression for $L^R$, which is got by reversing the regular expression of $L$.</li>
+<li>Homomorphism: A homomorphism $h$ on an alphabet is a function that gives a string for each symbol in that alphabet. The homomorphism can be extended to map on strings. For a regular language $L$, $h(L)=\{h(w)| \, w \in L \}$ is also a regular language. The proof also follows from homomorphism of regular expression.</li>
+<li>Inverse homomorphism: Let $h$ a homomorphism and $L$ is a language whose alphabet is the output language of $h$, $h^{-1} = \{w| \, h(w) \in L\}$ is also a regular language.</li>
+</ul>
+</span>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/automata/" rel="tag">#automata</a>
+          
+            <a href="/tags/coursera/" rel="tag">#coursera</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/03/17/Notes-on-Convex-Optimization/" rel="prev">Notes on Convex Optimization</a>
+            
+          </div>
+
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2014/09/08/Notes-on-Automata-Course/" rel="next">Notes on Automata - Week 1</a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+ </div>
+
+        
+
+        
+          <div class="comments" id="comments">
+            
+          </div>
+        
+      </div>
+
+      
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table Of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="/images/default_avatar.jpg" alt="Bingo.H" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">Bingo.H</p>
+        </div>
+        <p class="site-description motion-element" itemprop="description">Bingo.H's blog</p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">5</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            
+              <span class="site-state-item-count">3</span>
+              <span class="site-state-item-name">categories</span>
+              
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">6</span>
+              <span class="site-state-item-name">tags</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Week_2_Snippets_–_Regular_Expression_and_Properties_of_Regular_Languages"><span class="nav-number">1.</span> <span class="nav-text">Week 2 Snippets – Regular Expression and Properties of Regular Languages</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Regular_Expressions"><span class="nav-number">1.1.</span> <span class="nav-text">Regular Expressions</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Decision_Properties_of_Regular_Languages"><span class="nav-number">1.2.</span> <span class="nav-text">Decision Properties of Regular Languages</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#The_Pumping_Lemma"><span class="nav-number">1.2.1.</span> <span class="nav-text">The Pumping Lemma</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#The_Minimum-State_DFA_for_a_Regular_Language"><span class="nav-number">1.2.2.</span> <span class="nav-text">The Minimum-State DFA for a Regular Language</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Closure_Properties_of_Regular_Languages"><span class="nav-number">1.3.</span> <span class="nav-text">Closure Properties of Regular Languages</span></a></li></ol></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner"> <div class="copyright" >
+  
+  &copy; &nbsp; 
+  <span itemprop="copyrightYear">2015</span>
+  <span class="with-love">
+    <i class="icon-next-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Bingo.H</span>
+</div>
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="http://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+ </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+  
+    
+    
+
+  
+
+
+  
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.1"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.1"></script>
+  
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/js/motion_global.js?v=0.4.5.1" id="motion.global"></script>
+
+
+
+
+  <script type="text/javascript" src="/js/nav-toggle.js?v=0.4.5.1"></script>
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.5.1" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 0.4 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    var $tocContent = $('.post-toc-content');
+    if (isDesktop() && CONFIG.sidebar === 'post') {
+      if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+        displaySidebar();
+      }
+    }
+  });
+</script>
+
+
+
+  <script type="text/javascript">
+    $(document).ready(function () {
+      if (CONFIG.sidebar === 'always') {
+        displaySidebar();
+      }
+      if (isMobile()) {
+        FastClick.attach(document.body);
+      }
+    });
+  </script>
+
+  
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/lazyload.js"></script>
+  <script type="text/javascript">
+    $(function () {
+      $("#posts").find('img').lazyload({
+        placeholder: "/images/loading.gif",
+        effect: "fadeIn"
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,173 +1,784 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html class="theme-next use-motion theme-next-mist">
 <head>
-	<meta charset="UTF-8"/>
-	<meta name="viewport"
-	      content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-	<meta name="apple-mobile-web-app-capable" content="yes">
-	<meta name="apple-mobile-web-app-status-bar-style" content="black">
-	<meta name="description" content="Bingo.H's blog">
-	<link rel="icon" type="image/x-icon" href="/img/favicon.ico">
+  
 
-	
-	<link rel="stylesheet" href="/bower_components/normalize.css/normalize.css"/>
-	<link rel="stylesheet" href="/css/style.css">
-	
-
-	<title>Bingo.H's blog - Don't panic!</title>
-</head>
-<body>
-<header id="header">
-	<div class="center">
-		<div class="wrap">
-			<div id="site">
-				<h1><a href="/">Bingo.H's blog</a></h1>
-				
-				<h2><a href="/">Don't panic!</a></h2>
-				
-			</div>
-			<nav id="menu">
-				<ul>
-					
-					<li><a href="/">首页</a></li>
-					
-					<li><a href="/archives">归档</a></li>
-					
-				</ul>
-			</nav>
-		</div>
-	</div>
-</header>
-
-<div id="content">
-	<div class="center">
-		<div class="main-col">
-			
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
 
-<article class="post">
-	
-	<div class="post-content">
-		<header>
-			
-				<div class="meta">
-					<div class="icon"></div>
-					<time datetime="2015-09-28T12:36:54.000Z"><a href="/2015/09/28/hello-world/">2015-09-28</a></time>
-				</div>
-			
-			
-
-<h1 class="title"><a href="/2015/09/28/hello-world/">Hello World</a></h1>
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
 
 
-		</header>
-		<div class="entry">
-			
-			<p>Welcome to <a href="http://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="http://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="http://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick_Start">Quick Start</h2><h3 id="Create_a_new_post">Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run_server">Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate_static_files">Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy_to_remote_sites">Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
-
-			
-		</div>
-		<footer class="clearfix">
-			
-				
-				
-					<div class="disqus-comment">
-						<a href="http://yoursite.com/2015/09/28/hello-world/#disqus_thread" class="comment-link">评论</a>
-					</div>
-				
-			
-			
-			
-		</footer>
-	</div>
-</article>
 
 
-<nav id="pagination">
-	
-	
-</nav>
 
 
-<script>
-	(function (disqus_shortname) {
-		window.addEventListener('DOMContentLoaded', function () {
-			var dsq = document.createElement('script');
-			dsq.type = 'text/javascript';
-			dsq.async = true;
-			dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
-			document.getElementsByTagName('head')[0].appendChild(dsq);
-		}, false);
-	}('your_disqus_shortname'));
+
+
+  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+
+
+
+  <link href='//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+
+
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.5.1"/>
+
+
+    <meta name="description" content="Bingo.H's blog" />
+
+
+
+  <meta name="keywords" content="Hexo,next" />
+
+
+
+
+
+  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.1" />
+
+
+<meta name="description" content="Bingo.H&apos;s blog">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Bingo.H's blog">
+<meta property="og:url" content="https://bingoh.github.io/index.html">
+<meta property="og:site_name" content="Bingo.H's blog">
+<meta property="og:description" content="Bingo.H&apos;s blog">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Bingo.H's blog">
+<meta name="twitter:description" content="Bingo.H&apos;s blog">
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: 'post'
+  };
 </script>
 
+  <title> Bingo.H's blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  <!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+  
 
 
-		</div>
-		
-	</div>
+
+  <div class="container one-column 
+   page-home 
+">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><h1 class="site-meta">
+  <span class="logo-line-before"><i></i></span>
+  <a href="/" class="brand" rel="start">
+      <span class="logo">
+        <i class="icon-next-logo"></i>
+      </span>
+      <span class="site-title">Bingo.H's blog</span>
+  </a>
+  <span class="logo-line-after"><i></i></span>
+</h1>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
 </div>
 
-<footer id="footer">
-	<div class="center">
-		&copy; 2015
-		
-		Bingo.H
-		.
-		&nbsp;&nbsp;
-		Blog generated by <a href="http://hexo.io">hexo</a>
-	</div>
-</footer>
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            <i class="menu-item-icon icon-next-home"></i> <br />
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            <i class="menu-item-icon icon-next-archives"></i> <br />
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            <i class="menu-item-icon icon-next-tags"></i> <br />
+            Tags
+          </a>
+        </li>
+      
+
+      
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content"> 
+  <section id="posts" class="posts-expand">
+    
+      
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              <a class="post-title-link" href="/2015/03/17/Notes-on-Convex-Optimization/" itemprop="url">
+                Notes on Convex Optimization
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          Posted on
+          <time itemprop="dateCreated" datetime="2015-03-17T00:12:00+08:00" content="2015-03-17">
+            2015-03-17
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; In
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <a href="/categories/Math/" itemprop="url" rel="index">
+                  <span itemprop="name">Math</span>
+                </a>
+              </span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <p>最近开始学习凸优化，虽然作为数学系的学生曾上过数值优化课，但当时学得是“稀里糊涂”(in boss’s words)。当然以前也没有认识到数值优化的应用，现转为初级码农，从业ML，遂得知优化之实用(当然主要是每年paper无数)，重头学习凸优化。目前正在看<a href="http://www.uclouvain.be/32349.html">Yurii Nesterov</a>所编的教材的<a href="http://book.douban.com/subject/1834645/">Introductory Lectures on Convex Optimization: A Basic Course</a>，为免看完即忘，因此作了笔记。</p>
+<h2 id="What’s_in_this_book">What’s in this book</h2><ul>
+<li>General optimization problems (Unfortunately “unsolvable”)</li>
+<li>Smooth convex optimization</li>
+<li>Nonsmooth convex optimization</li>
+<li>Convex minimization problems with explicit structure</li>
+</ul>
+<p>PS: Goals of this course (from Introduction section):</p>
+<ul>
+<li>Show that: despite their attraction, the proposed “solutions” of general optimization problems very often cannot satisfy the expectations of a naive user. The main face, which should be known to any person dealing with optimization models, is that in general <strong>optimization problems are unsolvable</strong>. (The reality is always cruel)</li>
+<li>Discussing methods for <strong>solvable nonlinear models</strong>, namely <strong>convex optimization problems</strong>.</li>
+</ul>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/03/17/Notes-on-Convex-Optimization/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
 
 
-<script src="/bower_components/jquery/dist/jquery.min.js"></script>
-<script src="/js/jquery.imagesloaded.min.js"></script>
-<script src="/js/gallery.js"></script>
+    
+      
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              <a class="post-title-link" href="/2014/09/19/Notes-on-Automata-Course--Week-2/" itemprop="url">
+                Notes on Automata - Week 2
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          Posted on
+          <time itemprop="dateCreated" datetime="2014-09-19T00:59:29+08:00" content="2014-09-19">
+            2014-09-19
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; In
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <a href="/categories/Programming/" itemprop="url" rel="index">
+                  <span itemprop="name">Programming</span>
+                </a>
+              </span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <p>In week 2 of <a href="https://class.coursera.org/automata">Automata Course</a>, regular expressions are introduced, along with some applications of regular expressions. Not surprisely, the regular expressions describe exactly the regular languages, the same as Finite Automatas. Also, the properties of regular languages are introduced, including decisions properties and closure properties. The latter indicates that the regular class is closed under operations such as union, intersection, difference, etc, while a decision property for a class of languages is an algorithm that takes a formal description of a language (e.g., DFA) and tells whether or not some property holds. In particular, the pumping lemma is useful to tell whether a language is regular or not.</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2014/09/19/Notes-on-Automata-Course--Week-2/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
 
 
-<script>
-	/* #header特效 */
-	(function() {
-		var $header = $('#header');
-		$(window).on('scroll', function() {
-			if (window.scrollY > 100) {
-				$header.addClass('small');
-			} else {
-				$header.removeClass('small');
-			}
-		});
-	}());
+    
+      
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              <a class="post-title-link" href="/2014/09/08/Notes-on-Automata-Course/" itemprop="url">
+                Notes on Automata - Week 1
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          Posted on
+          <time itemprop="dateCreated" datetime="2014-09-08T01:19:41+08:00" content="2014-09-08">
+            2014-09-08
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; In
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <a href="/categories/Programming/" itemprop="url" rel="index">
+                  <span itemprop="name">Programming</span>
+                </a>
+              </span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <p>上个学期修了计算理论课程，但结果没有去上过几次课，最后勉强没有挂科。但实际上，计算理论是CS之所以能成为科学的重要基础，也是CS中非常有趣的部分。因此选了<a href="https://www.coursera.org/">Coursera</a>的<a href="https://class.coursera.org/automata">Automata</a>课程，由Stanford的<a href="http://infolab.stanford.edu/~ullman/">Jeff Ullman</a>教授讲课。教授自然是大神，传说中的<a href="http://book.douban.com/subject/1134994/">龙书</a>（《编译原理》）的作者，当然半路出家的我并没有拜读过，不过封面真是赞啊。</p>
+<h2 id="What’s_in_this_course">What’s in this course</h2><ul>
+<li>Regular languages and their descriptors<ul>
+<li>Finite Automata, nondeterministic finite automata, regular expressions</li>
+<li>Algorithms to decide questions about regular languages, e.g., is it empty?</li>
+<li>Closure properties of regular languages</li>
+</ul>
+</li>
+<li>Context-free languages and their descriptors<ul>
+<li>Context-free grammars, pushdown automata</li>
+<li>Decisions and closure properties</li>
+</ul>
+</li>
+<li>Recursive and recursively enumerable languages<ul>
+<li>Turing machines, deciability of problems</li>
+<li>The limit of what can be computed</li>
+</ul>
+</li>
+<li>Intractable problems<ul>
+<li>Problems that (appear to) require exponential time</li>
+<li>NP-completeness and beyond</li>
+</ul>
+</li>
+</ul>
+<p>PS: Ullman教授提到了这样的事实： <strong>A survey of Stanford grads 5 years out asked which of their courses did they use in their job.</strong></p>
+<ul>
+<li>Basics like intro-programming took the top spots, of course.</li>
+<li>But among optional courses, CS154 (Automata and Complexity Theory) stood remarkably high.</li>
+</ul>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2014/09/08/Notes-on-Automata-Course/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              <a class="post-title-link" href="/2014/08/21/Writting-in-Markdown/" itemprop="url">
+                Writing in Markdown
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          Posted on
+          <time itemprop="dateCreated" datetime="2014-08-21T11:01:25+08:00" content="2014-08-21">
+            2014-08-21
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; In
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <a href="/categories/HowTos/" itemprop="url" rel="index">
+                  <span itemprop="name">HowTos</span>
+                </a>
+              </span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <p>Writing with <a href="http://daringfireball.net/projects/markdown/">markdown</a> is not quite hard. It is a text-to-HTML conversion tools for web writers. Actually, Hexo and many other static blogs have markdown support. I mark down some basic usage for reference, from <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">Markdown Cheetsheet</a> and the <a href="http://daringfireball.net/projects/markdown/dingus">original sepc</a>.</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2014/08/21/Writting-in-Markdown/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              <a class="post-title-link" href="/2014/07/24/Hexo-Blog-On-Openshift/" itemprop="url">
+                Hexo Blog On Openshift
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          Posted on
+          <time itemprop="dateCreated" datetime="2014-07-24T09:37:20+08:00" content="2014-07-24">
+            2014-07-24
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; In
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <a href="/categories/HowTos/" itemprop="url" rel="index">
+                  <span itemprop="name">HowTos</span>
+                </a>
+              </span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <p>This is a static blog built by <a href="http://hexo.io/">Hexo</a>, which is a simple but powerful blog framework implemented by Node.js. Actually, a hexo blog can be built with just few commands. It has <a href="http://daringfireball.net/projects/markdown/">markdown</a> support, which is also a simple but powerful mark language. Hexo and other static blog framework, such as <a href="http://jekyllrb.com/">jekyll</a>, parses posts with markdown or other render engine and generates static files (seems not only html) with beatutiful themes. The user don’t need to be an expert on web design to have a fancy indie blog. However, the most important thing for me maybe keep writting blogs.<br>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2014/07/24/Hexo-Blog-On-Openshift/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+  </section>
+
+  
+ </div>
+
+        
+
+        
+      </div>
+
+      
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      <section class="site-overview">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="/images/default_avatar.jpg" alt="Bingo.H" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">Bingo.H</p>
+        </div>
+        <p class="site-description motion-element" itemprop="description">Bingo.H's blog</p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">5</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            
+              <span class="site-state-item-count">3</span>
+              <span class="site-state-item-name">categories</span>
+              
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">6</span>
+              <span class="site-state-item-name">tags</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+
+    </div>
+  </aside>
+
+
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner"> <div class="copyright" >
+  
+  &copy; &nbsp; 
+  <span itemprop="copyrightYear">2015</span>
+  <span class="with-love">
+    <i class="icon-next-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Bingo.H</span>
+</div>
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="http://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+ </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+  
+    
+    
+
+  
+
+
+  
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.1"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.1"></script>
+  
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/js/motion_global.js?v=0.4.5.1" id="motion.global"></script>
+
+
+
+
+  <script type="text/javascript" src="/js/nav-toggle.js?v=0.4.5.1"></script>
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+
+  <script type="text/javascript">
+    $(document).ready(function () {
+      if (CONFIG.sidebar === 'always') {
+        displaySidebar();
+      }
+      if (isMobile()) {
+        FastClick.attach(document.body);
+      }
+    });
+  </script>
+
+  
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+  });
 </script>
 
-
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
-<script src="/fancybox/jquery.fancybox.pack.js"></script>
-<script>
-	(function ($) {
-		$('.fancybox').fancybox();
-	})(jQuery);
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
 </script>
 
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
 
-<script>
-	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  
+  
 
-	ga('create', 'your_google_analytics_id', 'auto');
-	ga('send', 'pageview');
-</script>
-
-
+  
+  <script type="text/javascript" src="/js/lazyload.js"></script>
+  <script type="text/javascript">
+    $(function () {
+      $("#posts").find('img').lazyload({
+        placeholder: "/images/loading.gif",
+        effect: "fadeIn"
+      });
+    });
+  </script>
 </body>
 </html>
