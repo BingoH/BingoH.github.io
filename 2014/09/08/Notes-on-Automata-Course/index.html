@@ -51,7 +51,9 @@ Regu">
 <meta property="og:description" content="上个学期修了计算理论课程，但结果没有去上过几次课，最后勉强没有挂科。但实际上，计算理论是CS之所以能成为科学的重要基础，也是CS中非常有趣的部分。因此选了Coursera的Automata课程，由Stanford的Jeff Ullman教授讲课。教授自然是大神，传说中的龙书（《编译原理》）的作者，当然半路出家的我并没有拜读过，不过封面真是赞啊。
 What’s in this course
 Regu">
-<meta property="og:updated_time" content="2015-09-28T16:52:42.000Z">
+<meta property="og:image" content="https://bingoh.github.io/images/automata/tennis.png">
+<meta property="og:image" content="https://bingoh.github.io/images/automata/epsilon_nfa.png">
+<meta property="og:updated_time" content="2015-09-29T02:26:25.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Notes on Automata - Week 1">
 <meta name="twitter:description" content="上个学期修了计算理论课程，但结果没有去上过几次课，最后勉强没有挂科。但实际上，计算理论是CS之所以能成为科学的重要基础，也是CS中非常有趣的部分。因此选了Coursera的Automata课程，由Stanford的Jeff Ullman教授讲课。教授自然是大神，传说中的龙书（《编译原理》）的作者，当然半路出家的我并没有拜读过，不过封面真是赞啊。
@@ -198,6 +200,13 @@ Regu">
 
         
           
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2014/09/08/Notes-on-Automata-Course/#comments" itemprop="discussionUrl">
+              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2014/09/08/Notes-on-Automata-Course/" itemprop="commentsCount"></span>
+            </a>
+          </span>
+          
         
       </div>
     </header>
@@ -246,7 +255,7 @@ Regu">
 <li>State changes in response to <strong>input</strong></li>
 <li>Rules that tell how the state changes in response to inputs are called <strong>transitions</strong></li>
 </ul>
-<p><strong>An Example</strong><br>A Tennis consists of 3-5 sets, each of which contains 6 or more games. To score a game, one player serves throughout. To win, you must score at least 4 points. Meanwhile, you must win by at least 2 points.<br>Suppose the inputs are s = “server wins points” and o = “opponent wins points”. Then all states and transitions can be represented as follow graph.<br><!--<img src="http://blog-bingh.qiniudn.com/images/automata/tennis.png”&gt;</img>!–&gt;<br><img src="/images/automata/tennis.png" alt=""><br>The game starts from state “Love”, and ends when either server or opponent wins, which represents <strong>end states</strong>. The automaton accepts strings which a winner is decided. If neither player can lead by 2 points, the game would transform back and forth between “deuce” and “Ad-in” or “Ad-out”. By the way, the Isner–Mahut match at the 2010 Wimbledon Championships holds the record for the <a href="http://en.wikipedia.org/wiki/Longest_tennis_match_records">longest tennis match</a>, which lasts for 11 hours, 5 minutes, in 3 days, with the final score 70-68. I happens to watch the news at that time, and how time flies.</p>
+<p><strong>An Example</strong><br>A Tennis consists of 3-5 sets, each of which contains 6 or more games. To score a game, one player serves throughout. To win, you must score at least 4 points. Meanwhile, you must win by at least 2 points.<br>Suppose the inputs are s = “server wins points” and o = “opponent wins points”. Then all states and transitions can be represented as follow graph.<br><img src="/images/automata/tennis.png" alt=""><br>The game starts from state “Love”, and ends when either server or opponent wins, which represents <strong>end states</strong>. The automaton accepts strings which a winner is decided. If neither player can lead by 2 points, the game would transform back and forth between “deuce” and “Ad-in” or “Ad-out”. By the way, the Isner–Mahut match at the 2010 Wimbledon Championships holds the record for the <a href="http://en.wikipedia.org/wiki/Longest_tennis_match_records" target="_blank" rel="external">longest tennis match</a>, which lasts for 11 hours, 5 minutes, in 3 days, with the final score 70-68. I happens to watch the news at that time, and how time flies.</p>
 <p><strong>Language of an Automaton</strong></p>
 <ul>
 <li>The set of strings accepted by an automaton A is the <strong>language</strong> of A. Denoted as L(A).</li>
@@ -290,13 +299,13 @@ Regu">
 <li>Final states = all those (subset of $Q$) contains a member of $F$</li>
 <li>Transition function $\delta_D(\{q_1, \ldots, q_k\}, a) = \cup \delta_N(q_i, a), \, i = 1, \ldots, k$.<br>Then the NFA and DFA accepts the same language. It can be proved by induction on $|w|$ that $\delta_N(q_0, w) = \delta_D(q_0, w)$, thus the NFA and DFA accepts the same strings.</li>
 </ul>
-<h3 id="NFA_with_$\epsilon$-Transitions">NFA with $\epsilon$-Transitions</h3><p>We can even allow state-to-state transition on $\epsilon$ input, these transitions are done spontaneously, without looking at the input string. Again, the extension only accepts regular language. It can be proved that for any $\epsilon$-NFA, there is a NFA which accepts the same language. The intuition is that we can combine the $\epsilon$-transitions with the next transition on real input. And the prove is also completed with induction.<br><!--<img src="http://blog-bingh.qiniudn.com/images/automata/epsilon_nfa.png”&gt;</img>!–&gt;<br><img src="/images/automat/epsilon_nfa.png" alt=""></p>
+<h3 id="NFA_with_$\epsilon$-Transitions">NFA with $\epsilon$-Transitions</h3><p>We can even allow state-to-state transition on $\epsilon$ input, these transitions are done spontaneously, without looking at the input string. Again, the extension only accepts regular language. It can be proved that for any $\epsilon$-NFA, there is a NFA which accepts the same language. The intuition is that we can combine the $\epsilon$-transitions with the next transition on real input. And the prove is also completed with induction.<br><img src="/images/automata/epsilon_nfa.png" alt=""></p>
 <h3 id="Remark">Remark</h3><ul>
 <li>Not so obviously, the DFA, NFA, $\epsilon$-NFA accepts exactly the same class of languages: the regular language, although the last two seem to be more powerful. It seems that regular languages is a boundary for finite automatas, which has no memory to remember previous states and symbols, and only finite states available.</li>
 <li>The NFA types are easier design, and may have exponential fewer states than a equivalent DFA (see subset construction).</li>
 <li>Only a DFA can be implemented until now.</li>
 </ul>
---></p></span>
+</span>
       
     </div>
 
@@ -346,6 +355,10 @@ Regu">
         
           <div class="comments" id="comments">
             
+              <div id="disqus_thread">
+                <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+              </div>
+            
           </div>
         
       </div>
@@ -390,14 +403,14 @@ Regu">
 
           <div class="site-state-item site-state-categories">
             
-              <span class="site-state-item-count">3</span>
+              <span class="site-state-item-count">5</span>
               <span class="site-state-item-name">categories</span>
               
           </div>
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">6</span>
+              <span class="site-state-item-count">12</span>
               <span class="site-state-item-name">tags</span>
               </a>
           </div>
@@ -425,7 +438,7 @@ Regu">
           <div class="post-toc">
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#What’s_in_this_course"><span class="nav-number">1.</span> <span class="nav-text">What’s in this course</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Week_1_Snippets_–_Introduction_to_Finite_Automata"><span class="nav-number">2.</span> <span class="nav-text">Week 1 Snippets – Introduction to Finite Automata</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Introduction"><span class="nav-number">2.1.</span> <span class="nav-text">Introduction</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#What’s_in_this_course"><span class="nav-number">1.</span> <span class="nav-text">What’s in this course</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Week_1_Snippets_–_Introduction_to_Finite_Automata"><span class="nav-number">2.</span> <span class="nav-text">Week 1 Snippets – Introduction to Finite Automata</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Introduction"><span class="nav-number">2.1.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Deterministic_Finite_Automata"><span class="nav-number">2.2.</span> <span class="nav-text">Deterministic Finite Automata</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Nondeterministic_Finite_Automata"><span class="nav-number">2.3.</span> <span class="nav-text">Nondeterministic Finite Automata</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#NFA_with_$\epsilon$-Transitions"><span class="nav-number">2.4.</span> <span class="nav-text">NFA with $\epsilon$-Transitions</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Remark"><span class="nav-number">2.5.</span> <span class="nav-text">Remark</span></a></li></ol></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator"></div>
@@ -475,6 +488,27 @@ Regu">
     
     
 
+  
+
+    <script type="text/javascript">
+      var disqus_shortname = 'BingoH';
+      var disqus_identifier = '2014/09/08/Notes-on-Automata-Course/';
+      var disqus_title = 'Notes on Automata - Week 1';
+      var disqus_url = 'https://bingoh.github.io/2014/09/08/Notes-on-Automata-Course/';
+
+      function run_disqus_script(disqus_script){
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
+
+      run_disqus_script('count.js');
+      
+        run_disqus_script('embed.js');
+      
+    </script>
   
 
 

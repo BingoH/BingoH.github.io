@@ -47,7 +47,9 @@
 <meta property="og:url" content="https://bingoh.github.io/2015/03/17/Notes-on-Convex-Optimization/index.html">
 <meta property="og:site_name" content="Bingo.H's blog">
 <meta property="og:description" content="最近开始学习凸优化，虽然作为数学系的学生曾上过数值优化课，但当时学得是“稀里糊涂”(in boss’s words)。当然以前也没有认识到数值优化的应用，现转为初级码农，从业ML，遂得知优化之实用(当然主要是每年paper无数)，重头学习凸优化。目前正在看Yurii Nesterov所编的教材的Introductory Lectures on Convex Optimization: A Basi">
-<meta property="og:updated_time" content="2015-09-28T17:09:52.000Z">
+<meta property="og:image" content="https://bingoh.github.io/images/convxopt/general_iter_scheme.png">
+<meta property="og:image" content="https://bingoh.github.io/images/convxopt/lipshitz_class.png">
+<meta property="og:updated_time" content="2015-09-29T02:32:29.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Notes on Convex Optimization">
 <meta name="twitter:description" content="最近开始学习凸优化，虽然作为数学系的学生曾上过数值优化课，但当时学得是“稀里糊涂”(in boss’s words)。当然以前也没有认识到数值优化的应用，现转为初级码农，从业ML，遂得知优化之实用(当然主要是每年paper无数)，重头学习凸优化。目前正在看Yurii Nesterov所编的教材的Introductory Lectures on Convex Optimization: A Basi">
@@ -192,6 +194,13 @@
 
         
           
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2015/03/17/Notes-on-Convex-Optimization/#comments" itemprop="discussionUrl">
+              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/03/17/Notes-on-Convex-Optimization/" itemprop="commentsCount"></span>
+            </a>
+          </span>
+          
         
       </div>
     </header>
@@ -232,13 +241,13 @@
 </ul>
 </li>
 </ul>
-<p><strong>General Iterative Scheme</strong><br><!--<img src="http://blog-bingh.qiniudn.com/images/convxopt/general_iter_scheme.png”&gt;</img>–&gt;<br><img src="/images/convxopt/general_iter_scheme.png" alt=""></p>
+<p><strong>General Iterative Scheme</strong><br><img src="/images/convxopt/general_iter_scheme.png" alt=""></p>
 <p><strong>Local black box</strong></p>
 <ul>
 <li>The only information available for the numerical scheme is the answer of the oracle</li>
 <li>The orical is local: A small variation of the problem far enough from the test point $x$ does not change the answer at $x$</li>
 </ul>
-<h4 id="Complexity_bounds_for_global_optimization">Complexity bounds for global optimization</h4><p>Consider the class of problems $\mathcal{C}$, $\mathbb{R}^n$ equiped with $l_\infty$-norm, $B_n = \{ x \in \mathbb{R}^n | 0 \leq x^{(i)} \leq 1, i = 1, \ldots, m \}$,<br><!--<img src="http://blog-bingh.qiniudn.com/images/convxopt/lipshitz_class.png”&gt;</img>–&gt;<br><img src="/images/convxopt/lipshitz_class.png" alt=""><br>Then it is proved that the <strong>uniform grid method</strong> is optimal for $\mathcal{C}$, which has a lower bound $(\left \lfloor \frac{L}{2\epsilon} \right \rfloor)^n$. Then for $L=2, n=10, \epsilon = 0.01$ it would take $10^{20}$ calls of oracle (0-order), at least 31, 250, 000 years.</p>
+<h4 id="Complexity_bounds_for_global_optimization">Complexity bounds for global optimization</h4><p>Consider the class of problems $\mathcal{C}$, $\mathbb{R}^n$ equiped with $l_\infty$-norm, $B_n = \{ x \in \mathbb{R}^n | 0 \leq x^{(i)} \leq 1, i = 1, \ldots, m \}$,<br><img src="/images/convxopt/lipshitz_class.png" alt=""><br>Then it is proved that the <strong>uniform grid method</strong> is optimal for $\mathcal{C}$, which has a lower bound $(\left \lfloor \frac{L}{2\epsilon} \right \rfloor)^n$. Then for $L=2, n=10, \epsilon = 0.01$ it would take $10^{20}$ calls of oracle (0-order), at least 31, 250, 000 years.</p>
 <p><strong>The lower bounds</strong></p>
 <ul>
 <li>To achieve the stopping criterion, for the worst problem (specific to the method), how many calls of oracles are needed for the method.</li>
@@ -256,7 +265,7 @@
 <li>The lower and upper bounds coincide up to a constant multiplicative factor</li>
 <li>if $\epsilon = O(\frac{L}{n})$, the <strong>uniform grid method</strong> is an <strong>optimal</strong> method for $\mathcal{C}$</li>
 </ul>
---></p></span>
+</span>
       
     </div>
 
@@ -302,6 +311,10 @@
         
           <div class="comments" id="comments">
             
+              <div id="disqus_thread">
+                <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+              </div>
+            
           </div>
         
       </div>
@@ -346,14 +359,14 @@
 
           <div class="site-state-item site-state-categories">
             
-              <span class="site-state-item-count">3</span>
+              <span class="site-state-item-count">5</span>
               <span class="site-state-item-name">categories</span>
               
           </div>
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">6</span>
+              <span class="site-state-item-count">12</span>
               <span class="site-state-item-name">tags</span>
               </a>
           </div>
@@ -381,7 +394,7 @@
           <div class="post-toc">
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#What’s_in_this_book"><span class="nav-number">1.</span> <span class="nav-text">What’s in this book</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Chapter_1_–_Nonlinear_Optimization"><span class="nav-number">2.</span> <span class="nav-text">Chapter 1 – Nonlinear Optimization</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#General_formulation_of_the_problem"><span class="nav-number">2.1.</span> <span class="nav-text">General formulation of the problem</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#“In_general,_optimization_problems_are_unsolvable”"><span class="nav-number">2.2.</span> <span class="nav-text">“In general, optimization problems are unsolvable”</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Performance_of_numerical_methods"><span class="nav-number">2.2.1.</span> <span class="nav-text">Performance of numerical methods</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#What’s_in_this_book"><span class="nav-number">1.</span> <span class="nav-text">What’s in this book</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Chapter_1_–_Nonlinear_Optimization"><span class="nav-number">2.</span> <span class="nav-text">Chapter 1 – Nonlinear Optimization</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#General_formulation_of_the_problem"><span class="nav-number">2.1.</span> <span class="nav-text">General formulation of the problem</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#“In_general,_optimization_problems_are_unsolvable”"><span class="nav-number">2.2.</span> <span class="nav-text">“In general, optimization problems are unsolvable”</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Performance_of_numerical_methods"><span class="nav-number">2.2.1.</span> <span class="nav-text">Performance of numerical methods</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Complexity_bounds_for_global_optimization"><span class="nav-number">2.2.2.</span> <span class="nav-text">Complexity bounds for global optimization</span></a></li></ol></li></ol></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator"></div>
@@ -431,6 +444,27 @@
     
     
 
+  
+
+    <script type="text/javascript">
+      var disqus_shortname = 'BingoH';
+      var disqus_identifier = '2015/03/17/Notes-on-Convex-Optimization/';
+      var disqus_title = 'Notes on Convex Optimization';
+      var disqus_url = 'https://bingoh.github.io/2015/03/17/Notes-on-Convex-Optimization/';
+
+      function run_disqus_script(disqus_script){
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
+
+      run_disqus_script('count.js');
+      
+        run_disqus_script('embed.js');
+      
+    </script>
   
 
 
