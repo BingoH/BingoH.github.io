@@ -32,7 +32,7 @@
 
 
 
-  <meta name="keywords" content="hexo,openshift," />
+  <meta name="keywords" content="convex optimization," />
 
 
 
@@ -41,17 +41,20 @@
   <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.1" />
 
 
-<meta name="description" content="This is a static blog built by Hexo, which is a simple but powerful blog framework implemented by Node.js. Actually, a hexo blog can be built with just few commands. It has markdown support, which is">
+<meta name="description" content="The simplest goal of general nonlinear optimization is to find a local minimum of a differentiable function. The majority of general nonlinear optimization methods are based on relaxation, i.e. genera">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hexo Blog On Openshift">
-<meta property="og:url" content="https://bingoh.github.io/2014/07/24/Hexo-Blog-On-Openshift/index.html">
+<meta property="og:title" content="Notes on Convex Optimization(2): Local Methods, Especially First-Order Methods">
+<meta property="og:url" content="https://bingoh.github.io/2015/10/19/Notes-on-Convex-Optimization-2-Local-Methods-Especially-First-Order-Methods/index.html">
 <meta property="og:site_name" content="Bingo.H's blog">
-<meta property="og:description" content="This is a static blog built by Hexo, which is a simple but powerful blog framework implemented by Node.js. Actually, a hexo blog can be built with just few commands. It has markdown support, which is">
-<meta property="og:image" content="https://bingoh.github.io/images/panic.jpg">
-<meta property="og:updated_time" content="2015-09-29T04:09:13.000Z">
+<meta property="og:description" content="The simplest goal of general nonlinear optimization is to find a local minimum of a differentiable function. The majority of general nonlinear optimization methods are based on relaxation, i.e. genera">
+<meta property="og:image" content="https://bingoh.github.io/images/convxopt/grad_descent.png">
+<meta property="og:image" content="https://bingoh.github.io/images/convxopt/quasi-newton.png">
+<meta property="og:image" content="https://bingoh.github.io/images/convxopt/quasi-newton-rule.png">
+<meta property="og:image" content="https://bingoh.github.io/images/convxopt/conjugate-gradients.png">
+<meta property="og:updated_time" content="2015-10-19T01:49:58.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo Blog On Openshift">
-<meta name="twitter:description" content="This is a static blog built by Hexo, which is a simple but powerful blog framework implemented by Node.js. Actually, a hexo blog can be built with just few commands. It has markdown support, which is">
+<meta name="twitter:title" content="Notes on Convex Optimization(2): Local Methods, Especially First-Order Methods">
+<meta name="twitter:description" content="The simplest goal of general nonlinear optimization is to find a local minimum of a differentiable function. The majority of general nonlinear optimization methods are based on relaxation, i.e. genera">
 
 
 <script type="text/javascript" id="hexo.configuration">
@@ -61,7 +64,7 @@
   };
 </script>
 
-  <title> Hexo Blog On Openshift | Bingo.H's blog </title>
+  <title> Notes on Convex Optimization(2): Local Methods, Especially First-Order Methods | Bingo.H's blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="en">
@@ -160,7 +163,7 @@
           
           
             
-              Hexo Blog On Openshift
+              Notes on Convex Optimization(2): Local Methods, Especially First-Order Methods
             
           
         </h1>
@@ -169,8 +172,8 @@
       <div class="post-meta">
         <span class="post-time">
           Posted on
-          <time itemprop="dateCreated" datetime="2014-07-24T09:37:20+08:00" content="2014-07-24">
-            2014-07-24
+          <time itemprop="dateCreated" datetime="2015-10-19T09:49:58+08:00" content="2015-10-19">
+            2015-10-19
           </time>
         </span>
 
@@ -179,8 +182,8 @@
             &nbsp; | &nbsp; In
             
               <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                <a href="/categories/HowTos/" itemprop="url" rel="index">
-                  <span itemprop="name">HowTos</span>
+                <a href="/categories/Math/" itemprop="url" rel="index">
+                  <span itemprop="name">Math</span>
                 </a>
               </span>
 
@@ -195,8 +198,8 @@
           
             <span class="post-comments-count">
             &nbsp; | &nbsp;
-            <a href="/2014/07/24/Hexo-Blog-On-Openshift/#comments" itemprop="discussionUrl">
-              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2014/07/24/Hexo-Blog-On-Openshift/" itemprop="commentsCount"></span>
+            <a href="/2015/10/19/Notes-on-Convex-Optimization-2-Local-Methods-Especially-First-Order-Methods/#comments" itemprop="discussionUrl">
+              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/10/19/Notes-on-Convex-Optimization-2-Local-Methods-Especially-First-Order-Methods/" itemprop="commentsCount"></span>
             </a>
           </span>
           
@@ -210,40 +213,66 @@
       
 
       
-        <span itemprop="articleBody"><p>This is a static blog built by <a href="http://hexo.io/" target="_blank" rel="external">Hexo</a>, which is a simple but powerful blog framework implemented by Node.js. Actually, a hexo blog can be built with just few commands. It has <a href="http://daringfireball.net/projects/markdown/" target="_blank" rel="external">markdown</a> support, which is also a simple but powerful mark language. Hexo and other static blog framework, such as <a href="http://jekyllrb.com/" target="_blank" rel="external">jekyll</a>, parses posts with markdown or other render engine and generates static files (seems not only html) with beatutiful themes. The user don’t need to be an expert on web design to have a fancy indie blog. However, the most important thing for me maybe keep writting blogs.<br><a id="more"></a></p>
-<h2 id="Hexo">Hexo</h2><p>To build a hexo blog, some tools are essential, i.e., node.js and git, then hexo, see the <a href="http://hexo.io/docs/index.html" target="_blank" rel="external">official guide</a>. It would not take ten minute for a linux or mac to get all ready. Then just make a directory, where the Hexo blog will be, execute the following command to initialze a blog.<br><figure class="highlight crystal"><table><tr><td class="code"><pre><span class="line"><span class="variable">$ </span>hexo init</span><br><span class="line"><span class="variable">$ </span>npm install</span><br></pre></td></tr></table></figure></p>
-<p>Now the floder includes some folder and files. The <em>_config.yml</em> configures most options of Hexo, and markdown posts will be in <em>source</em> folder. Then execute<br><figure class="highlight crystal"><table><tr><td class="code"><pre><span class="line"><span class="variable">$ </span>hexo generate</span><br></pre></td></tr></table></figure></p>
-<p>to generate the static web files. To see what created, raise up the server on local computer,<br><figure class="highlight axapta"><table><tr><td class="code"><pre><span class="line">$ hexo <span class="keyword">server</span></span><br></pre></td></tr></table></figure></p>
-<p>open the web browser and go to <code>http://localhost:4000</code>. To put the website on Internet, see the <a href="http://hexo.io/docs/deployment.html" target="_blank" rel="external">deployment</a>.</p>
-<p>One problem I encountered is that <em>“node command not found”</em>, this is because in linux or mac, the Node.JS executable is named as <em>nodejs</em> rather than <em>node</em>. Make a symbol link would solve the problem.<br><figure class="highlight gradle"><table><tr><td class="code"><pre><span class="line">$ ln -s <span class="regexp">/usr/</span>bin<span class="regexp">/nodejs /u</span>sr<span class="regexp">/bin/</span>node</span><br></pre></td></tr></table></figure></p>
-<p>The full <a href="http://hexo.io/docs/" target="_blank" rel="external">documentation</a> of Hexo.</p>
-<h2 id="Openshift">Openshift</h2><p>Openshift is an open cloud application platform by Red Hat. Up to three applications can be built with a free account. Follow this <a href="http://yangyang.in/2014/01/31/%E4%BD%BF%E7%94%A8-nginx-%E5%9C%A8-openshift-%E6%90%AD%E5%BB%BA%E9%9D%99%E6%80%81%E7%BD%91%E7%AB%99/" target="_blank" rel="external">blog tutorial</a>, the Hexo blog can be built using Nginx server. Actually, I have no knowledge about Nginx, and just followed the tutorial step by step. Maybe other web server can be used. Fortunately, I succeeded to upload website to openshift. The <em>rhc</em> client tool for openshift is really easy to use, which can be installed with <em>gem</em><br><figure class="highlight cmake"><table><tr><td class="code"><pre><span class="line">$ gem <span class="keyword">install</span> rhc</span><br></pre></td></tr></table></figure></p>
-<p>Then execute <code>rhc setup</code> to setup client tool. </p>
-<p>Once the openshift application is created, the application code repository can be cloned to local computer. The Hexo deployer for Openshift does not work on my computer, as it is complained that in <em>deployer/openshift.js</em>, <code>[error] TypeError: Arguments to path.join must be strings</code>. Thus to upload hexo generated static files, I have to copy all the files generated in Hexo’s <em>public</em> folder to Openshift application’s <em>diy</em> folder. That finally makes this blog.</p>
-<h2 id="Update">Update</h2><h3 id="Picture">Picture</h3><p>To use image in hexo, it is similar to use link in markdown, put <code>![image caption](image link)</code>, the image link can be two types,</p>
-<ul>
-<li>Local path: create a <em>img</em> folder in <em>…/hexo root/source/</em>, where the image will be located, and use <em>/img/image name</em> as image link. </li>
-<li><p>Internet URL: use other cloud storage service, such as Dropbox, or <a href="https://portal.qiniu.com/signup?code=3l7yvqm5j7fpu" target="_blank" rel="external">Qiniu</a>. Upload image to the cloud drive, and use the generated image url. <a href="http://www.winterland.me/2013/11/bae-imbed/" target="_blank" rel="external">Use hexo’s tag</a> to add image.</p>
-<ul>
-<li><p>Add <em>imbed.js</em> in <em>…/hexo root/scripts</em></p>
-<figure class="highlight vim"><table><tr><td class="code"><pre><span class="line">hexo.<span class="built_in">extend</span>.<span class="keyword">tag</span>.register(<span class="string">'imbed'</span>, <span class="function"><span class="keyword">function</span><span class="params">(args, content)</span>&#123;</span></span><br><span class="line">var id = <span class="keyword">args</span>[<span class="number">0</span>];</span><br><span class="line"><span class="keyword">return</span> <span class="string">'http://your_bucket_url'</span>;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>Use <em>img</em> tag in markdown.</p>
-<figure class="highlight django"><table><tr><td class="code"><pre><span class="line"><span class="xml">...</span><br><span class="line"><span class="tag">&lt;<span class="title">img</span> <span class="attribute">src</span>=<span class="value">"</span></span></span><span class="template_tag">&#123;% imbed %&#125;</span><span class="xml"><span class="tag"><span class="value">/sub_folder_name/image_name"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">img</span>&gt;</span></span><br><span class="line">...</span></span><br></pre></td></tr></table></figure>
-</li>
+        <span itemprop="articleBody"><p>The simplest goal of general nonlinear optimization is to find a <em>local minimum</em> of a <em>differentiable</em> function. The majority of general nonlinear optimization methods are based on <em>relaxation</em>, i.e. generating decrease sequence $\{ f(x_k) \}_{k = 0}^\infty$, such that<br>$$<br>f(x_{k+1}) \leq f(x_k), ~ k = 0, 1, \cdots.<br>$$</p>
+<p>To implement the idea of relaxation, we employ another fundamental principle, <em>approximation</em>. Usually, we apply <em>local approximation</em> based on derivatives of nonlinear functions. Local methods are discussed in general setting without convexity.</p>
+<a id="more"></a>
+<h2 id="Optimality_Conditions">Optimality Conditions</h2><ul>
+<li>First order necessary condition (Fermat’s theorem)</li>
+<li>Second order necessary condition</li>
+<li>Second order sufficient condition</li>
 </ul>
-</li>
+<h2 id="Gradient_Method">Gradient Method</h2><p>For unconstrained differentiable problems, it can be verified that the <em>antigradient</em> is a <em>locally steepest</em> descent direction, thus gradient method makes move in the antigradient direction.<br><img src="/images/convxopt/grad_descent.png" alt="Gradient Method"><br>The step size $h_k$ can be chosen</p>
+<ul>
+<li>as constant or decrease over iteration (mainly in convex optimization)</li>
+<li>by optimize a one dimensional problem (completely theoretical)<br>$ h_k = \arg \min_{h \geq 0} f(x_k - hf’(x_k))$</li>
+<li>by Goldstein-Armijo rule (commonly used in practical algorithms). Find $x_{k+1} = x_k - hf’(x_k)$, such that<br>$ \alpha \langle f’(x_k), x_k - x_{k+1} \rangle \leq f(x_k) - f(x_{k+1}) $,<br>$ \beta  \langle f’(x_k), x_k - x_{k+1} \rangle \geq f(x_k) - f(x_{k+1}) $ <br> Denote $\phi(h) = f(x - hf’(x)), ~ h \geq 0$, then the step-size acceptable belong to that part of the graph of $\phi$ that is located between two linear functions:<br>$ \phi_1(h) = f(x) - \alpha h \| f’(x) \|^2, \quad \phi_2(h) = f(x) - \beta h \| f’(x) \|^2 $ <br> If $\phi(h)$ is bounded below, there exists acceptable step-size.</li>
 </ul>
-<p>For example,<br><img src="/images/panic.jpg" alt=""></p>
-<h3 id="Math">Math</h3><p>The default hexo does not contain TeX parser, but <a href="http://www.mathjax.org/" target="_blank" rel="external">MathJax</a> can be added. Also, there is a plugin, <a href="https://github.com/akfish/hexo-math" target="_blank" rel="external">hexo-math</a> to make this even easier.<br><strong>MathJax Inline</strong><br><figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">Simple inline $a = b + c$.</span><br></pre></td></tr></table></figure></p>
-<p>Always use <code>\</code> to escape special character for inline mode, or use hexo-math’s tags to avoid the hard way.</p>
-<p><strong>MathJax Block</strong><br><figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">$$\frac&#123;\partial u&#125;&#123;\partial t&#125;</span><br><span class="line">= h^2 \left( \frac&#123;\partial^2 u&#125;&#123;\partial x^2&#125; +</span><br><span class="line">\frac&#123;\partial^2 u&#125;&#123;\partial y^2&#125; +</span><br><span class="line">\frac&#123;\partial^2 u&#125;&#123;\partial z^2&#125;\right)$$</span><br></pre></td></tr></table></figure></p>
-<p><strong>Tag Inline</strong></p>
-<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">This equation &#123;% math \cos 2\theta = \cos^2 \theta - \sin^2 \theta =  2 \cos^2 \theta - 1 %&#125; is inline.</span><br></pre></td></tr></table></figure>
-<p><strong>Tag Block</strong></p>
-<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">&#123;% math-block %&#125;</span><br><span class="line">\begin&#123;aligned&#125;</span><br><span class="line">\dot&#123;x&#125; &amp; = \sigma(y-x) \\</span><br><span class="line">\dot&#123;y&#125; &amp; = \rho x - y - xz \\</span><br><span class="line">\dot&#123;z&#125; &amp; = -\beta z + xy</span><br><span class="line">\end&#123;aligned&#125;</span><br><span class="line">&#123;% endmath-block %&#125;</span><br></pre></td></tr></table></figure>
-<p>And the Bayes rule.<br>$$<br>\Pr(A_i \mid B) = \frac{\Pr(B \mid A_i)\Pr(A_i)}{\sum_j\Pr(B\mid A_j)P(A_j)}<br>$$</p>
-<p>PS: Move back to github pages, the git deployer can upload the contents perfectly.<br>PPS: Update Hexo to 3.x and use <a href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="external">NexT</a> theme, no need to use hexo-math.</p>
+<h3 id="Convergence_Analysis">Convergence Analysis</h3><h4 id="General_Lipschitz_continous_objective">General Lipschitz continous objective</h4><p>For unconstrained problem with $f(x) \in C_L^{1, 1}(\mathbb{R}^n)$ and bounded below, we have<br>$$<br>f(x_k) - f(x_{k+1}) \leq \frac{\omega}{L}|f’(x_k)|^2<br>$$<br>for some positive constant $\omega$. That leads to $O(\frac{1}{\sqrt(N)})$ <em>convergence rate</em> of $ g_N^* = \min_{0 \leq k \leq N} \| f’(x_k) \| $, which comes from the following result,<br>$$<br>g_N^* \leq \frac{1}{\sqrt{N+1}} \left[ \frac{1}{\omega} L(f(x_0) - f^*)\right]^{1/2},<br>$$<br>where $f^*$ is the optimal value.</p>
+<p>However, we cannot say anything about the rate of convergence of sequences $ \{ f(x_k)\}$ and $\{ x_k\}$. An counterexample, is the following function of two variables:<br>$$<br>f(x) = \frac{1}{2} x_1^2 + \frac{1}{4} x_2^4 - \frac{1}{2}x_2^2<br>$$<br>If we start gradient descent from $x_0 = (1, 0)$, we will only get a <em>stationary point</em> $x_1^* = (0, 0)$, since $\frac{\partial f}{\partial x_1}$is always zero.</p>
+<h4 id="Linear_convergence">Linear convergence</h4><p>If the objective satisfies the following assumptions:</p>
+<ul>
+<li>$f \in C_M^{2, 2}(\mathbb{R}^n)$</li>
+<li>there exists a local minimum at which the Hessian is positive definite</li>
+<li>we know some bounds $0 &lt; l \leq L &lt; \infty$ for the Hessian at $x^*$<br>$ l I_n \preceq f’’(x^*) \preceq LI_n $</li>
+<li>the starting point $x_0$ is close enough to $x^*$, i.e,<br>$r_0 = \| x_0 - x^* \| &lt; \bar{r} = \frac{2l}{M}$</li>
+</ul>
+<p>then the gradient descent method with step size $h_k = \frac{2}{L+l}$ leads to a <em>linear convergence rate</em>,<br>$$<br>\| x_k - x^* \| \leq \frac{\bar{r} r_0}{\bar{r}-r_0} \left( 1 - \frac{2l}{L+3l} \right)^k<br>$$</p>
+<h2 id="Newton_Method">Newton Method</h2><p>The Newton method for optimization problems generates points with the following update rule,<br>$$<br>x_{k+1} = x_k - [f’’(x_k)]^{-1} f’(x_k).<br>$$<br>It can be obtained by</p>
+<ul>
+<li>Minimizing the quadratic approximation of the objective, computed w.r.t. point $x_k$, $\phi(x) = f(x_k) + \langle f’(x_k), x - x_k \rangle + \frac{1}{2} \langle f’’(x_k)(x- x_k), x - x_k\rangle$</li>
+<li>Finding the roots of the nonlinear system $f’(x) = 0$ via <em>Newton method</em>.</li>
+</ul>
+<p>Newton method converges very fast. Actually, if the objective satisfies the following conditions</p>
+<ul>
+<li>$f \in C_M^{2, 2}(\mathbb{R}^n)$</li>
+<li>There exists a local minimum with positive definite Hessian: $f’’(x^*) \succeq lI_n, ~ l &gt; 0$</li>
+<li>The starting point $x_0$ is close enough to $x^*$, i.e., $\|x_0 - x^* \| &lt; \bar{r} = \frac{2l}{3M}$</li>
+</ul>
+<p>the Newton method converges quadratically:<br>$$<br>\|x_{k+1} - x^* \| \leq \frac{M \|x_k - x^* \|^2}{2 (l-M\|x_k - x^* \|)}<br>$$</p>
+<p>Surprisingly, the <em>region of quadratic convergence</em> of the Newton method is almost the same as the region of linear convergence of the gradient method. Overall, it is recommended to use gradient method at the initial stage of the minimization process to get close to a local minimum, and perform the final job by Newton method.</p>
+<h2 id="Quasi-Newton_Methods">Quasi-Newton Methods</h2><p>Fix some $\bar{x} \in \mathbb{R}^n$, the gradient method can be obtained by considering the following approximation,<br>$$<br>\phi_1(x) = f(\bar{x}) + \langle f’(\bar{x}), x - \bar{x} \rangle + \frac{1}{2h} \|x - \bar{x} \|^2,<br>$$<br>which is a $global upper$ approximation, if $h \in (0, \frac{1}{L}]$. And the Newton method is formulated from the quadratic approximation,<br>$$<br>\phi_2(x) = f(\bar{x}) + \langle f’(\bar{x}), x - \bar{x} \rangle + \frac{1}{2} \langle f’’(\bar{x})(x - \bar{x}), x - \bar{x} \rangle,<br>$$<br>this motivates us to use approximation better than $\phi_1(x)$ while less expensive than $\phi_2(x)$:<br>$$<br>\phi_G(x) = f(\bar{x}) + \langle f’(\bar{x}), x - \bar{x} \rangle + \frac{1}{2} \langle G(x - \bar{x}), x - \bar{x} \rangle,<br>$$<br>which leads to <em>quasi-Newton methods</em> (also <em>variable metric methods</em>). To be specific, these methods form a sequence of matrices $ \{ G_k \}: \;  G_k \rightarrow f’’(x^*)$<br>(or $\{ H_k \}: \; H_k \rightarrow [f’’(x_k)]^{-1}$), and update the solution with<br>$$<br>x_{k+1} = x_k - G_k^{-1} f’(x_k)<br>$$<br>(or $x_{k+1} = x_k - H_k f’(x_k)$ ). Only the gradients are involved in the process of generating sequence $\{ G_k \}$ or $\{ H_k \}$.<br><img src="/images/convxopt/quasi-newton.png" alt="Quasi-Newton Methods"></p>
+<p>Justified by the property of quadratic funcion $f(x) = \alpha + \langle a, x \rangle + \frac{1}{2} \langle Ax, x \rangle$,<br>$$<br>f’(x) - f’(y) = A(x-y), \  \forall x, y,<br>$$<br>the quasi-Newton rule is proposed:<br><img src="/images/convxopt/quasi-newton-rule.png" alt=""><br>There are many ways to satisfy the rule, which lead to various quasi-Newton methods, such as <a href="https://en.wikipedia.org/wiki/Broyden%E2%80%93Fletcher%E2%80%93Goldfarb%E2%80%93Shanno_algorithm" target="_blank" rel="external">BFGS</a>, <a href="https://en.wikipedia.org/wiki/Davidon%E2%80%93Fletcher%E2%80%93Powell_formula" target="_blank" rel="external">DFP</a>.</p>
+<h3 id="Convergence_Rate">Convergence Rate</h3><ul>
+<li>In a neighbourhood of strict minimum, quasi-Newton methods have a <em>superlinear</em> rate of convergence: for any $x_0$ there exists a number $N$ such that for all $k \geq N$, we have $\| x_{k+1} - x^* \| \leq  \text{const} \cdot  \| x_k - x^* \| \cdot \| x_{k-n} - x^* \| $;</li>
+<li>For global convergence, these methods are not better than the gradient method (at least from the theoretical point of view).</li>
+</ul>
+<h2 id="Conjugate_gradient_method">Conjugate gradient method</h2><p>The conjugate gradients methods are initially proposed for minimizing a quadratic function,<br>$$<br>\min_{x \in \mathcal{R}^n} f(x) = \min_{x \in \mathcal{R}^n} \alpha + \langle a, x \rangle + \frac{1}{2} \langle Ax, x \rangle,<br>$$<br>with $A = A^T \succ 0$. It is obvious that the problem statisfies</p>
+<ul>
+<li>the solution of this problem is $x^* = -A^{-1} a$ and $f^* = \alpha - \frac{1}{2} \langle Ax^*, x^* \rangle $</li>
+<li>the gradient $f’(x) = A(x-x^*)$</li>
+</ul>
+<p>The conjugate gradients consider the <em>Krylov</em> subspaces,<br>$$<br>\mathcal{L}_k = \text{Lin}\{A(x_0 - x^*), \ldots, A^k(x_0 -x^*)\}, \ k \geq 1,<br>$$<br>and theoretically genrate the sequence of points with<br>$$<br>x_k  = \arg \min \left\{ f(x) \, | \, x \in x_0 + \mathcal{L}_k \right\}, \ k \geq 1.<br>$$<br>This definition is only used for theoretical analysis. For quadratic objective, we have</p>
+<ul>
+<li>$\mathcal{L}_k = \text{Lin }\{f’(x_0), \ldots, f’(x_{k-1})\} = \text{Lin }\{ \delta_0, \ldots, \delta_{k-1} \}$,where $\delta_i = x_{i+1} - x_i$</li>
+<li>for any $k, i \geq 0$, we have $\langle f’(x_k), f’(x_i) \rangle = 0$, if $k \neq i$</li>
+<li>for any $k, i \geq 0$, we have $\langle A\delta_k, \delta_i \rangle = 0$<br>The second property indicates that we have the solution after $n$ steps, since the number of orthogonal directions in $\mathcal{R}^n$ cannot exceed $n$. The last property explains the name of the method.</li>
+</ul>
+<p>The general scheme of conjugate gradients (for minimizing a nonlinear function) :<br><img src="/images/convxopt/conjugate-gradients.png" alt="Conjugate Gradients"><br>There are different formulas for coefficient $\beta_k$, all of them lead to the same result for quadratic functions. In general nonlinear case, they generate different sequences.</p>
+<h3 id="Convergence_Rate-1">Convergence Rate</h3><ul>
+<li><em>Restarting</em>: the conjugate gradients terminate in $n$ iterations (or less), for quadratic objectives. However, for general nonlinear case, the conjugate directions lose any interpretation after $n$ iterations. Thus, in all practical schemes, at some moment we sets $\beta_k = 0$ (usually after every $n$ iterations).</li>
+<li>In a neighborhood of a strict minimum, the conjugate gradients schemes have a local $n$-step quadratic convergence: $\|x_{n+1} - x^* \| \leq \text{const} \cdot \|x_0 - x^* \|^2$</li>
+<li>When it comes to global convergence, the conjugate gradients are not better than the gradient method.</li>
+</ul>
 </span>
       
     </div>
@@ -252,9 +281,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/hexo/" rel="tag">#hexo</a>
-          
-            <a href="/tags/openshift/" rel="tag">#openshift</a>
+            <a href="/tags/convex-optimization/" rel="tag">#convex optimization</a>
           
         </div>
       
@@ -263,11 +290,11 @@
         <div class="post-nav">
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2014/08/21/Writting-in-Markdown/" rel="prev">Writing in Markdown</a>
-            
           </div>
 
           <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/03/17/Notes-on-Convex-Optimization/" rel="next">Notes on Convex Optimization</a>
             
           </div>
         </div>
@@ -375,7 +402,7 @@
           <div class="post-toc">
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Hexo"><span class="nav-number">1.</span> <span class="nav-text">Hexo</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Openshift"><span class="nav-number">2.</span> <span class="nav-text">Openshift</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Update"><span class="nav-number">3.</span> <span class="nav-text">Update</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Picture"><span class="nav-number">3.1.</span> <span class="nav-text">Picture</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Math"><span class="nav-number">3.2.</span> <span class="nav-text">Math</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Optimality_Conditions"><span class="nav-number">1.</span> <span class="nav-text">Optimality Conditions</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Gradient_Method"><span class="nav-number">2.</span> <span class="nav-text">Gradient Method</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Convergence_Analysis"><span class="nav-number">2.1.</span> <span class="nav-text">Convergence Analysis</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#General_Lipschitz_continous_objective"><span class="nav-number">2.1.1.</span> <span class="nav-text">General Lipschitz continous objective</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Linear_convergence"><span class="nav-number">2.1.2.</span> <span class="nav-text">Linear convergence</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Newton_Method"><span class="nav-number">3.</span> <span class="nav-text">Newton Method</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Quasi-Newton_Methods"><span class="nav-number">4.</span> <span class="nav-text">Quasi-Newton Methods</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Convergence_Rate"><span class="nav-number">4.1.</span> <span class="nav-text">Convergence Rate</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Conjugate_gradient_method"><span class="nav-number">5.</span> <span class="nav-text">Conjugate gradient method</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Convergence_Rate-1"><span class="nav-number">5.1.</span> <span class="nav-text">Convergence Rate</span></a></li></ol></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator"></div>
@@ -429,9 +456,9 @@
 
     <script type="text/javascript">
       var disqus_shortname = 'BingoH';
-      var disqus_identifier = '2014/07/24/Hexo-Blog-On-Openshift/';
-      var disqus_title = 'Hexo Blog On Openshift';
-      var disqus_url = 'https://bingoh.github.io/2014/07/24/Hexo-Blog-On-Openshift/';
+      var disqus_identifier = '2015/10/19/Notes-on-Convex-Optimization-2-Local-Methods-Especially-First-Order-Methods/';
+      var disqus_title = 'Notes on Convex Optimization(2): Local Methods, Especially First-Order Methods';
+      var disqus_url = 'https://bingoh.github.io/2015/10/19/Notes-on-Convex-Optimization-2-Local-Methods-Especially-First-Order-Methods/';
 
       function run_disqus_script(disqus_script){
         var dsq = document.createElement('script');

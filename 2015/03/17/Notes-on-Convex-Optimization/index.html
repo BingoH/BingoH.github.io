@@ -49,7 +49,7 @@
 <meta property="og:description" content="最近开始学习凸优化，虽然作为数学系的学生曾上过数值优化课，但当时学得是“稀里糊涂”(in boss’s words)。当然以前也没有认识到数值优化的应用，现转为初级码农，从业ML，遂得知优化之实用(当然主要是每年paper无数)，重头学习凸优化。目前正在看Yurii Nesterov所编的教材的Introductory Lectures on Convex Optimization: A Basi">
 <meta property="og:image" content="https://bingoh.github.io/images/convxopt/general_iter_scheme.png">
 <meta property="og:image" content="https://bingoh.github.io/images/convxopt/lipshitz_class.png">
-<meta property="og:updated_time" content="2015-09-29T02:32:29.000Z">
+<meta property="og:updated_time" content="2015-09-29T15:19:10.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Notes on Convex Optimization">
 <meta name="twitter:description" content="最近开始学习凸优化，虽然作为数学系的学生曾上过数值优化课，但当时学得是“稀里糊涂”(in boss’s words)。当然以前也没有认识到数值优化的应用，现转为初级码农，从业ML，遂得知优化之实用(当然主要是每年paper无数)，重头学习凸优化。目前正在看Yurii Nesterov所编的教材的Introductory Lectures on Convex Optimization: A Basi">
@@ -265,6 +265,11 @@
 <li>The lower and upper bounds coincide up to a constant multiplicative factor</li>
 <li>if $\epsilon = O(\frac{L}{n})$, the <strong>uniform grid method</strong> is an <strong>optimal</strong> method for $\mathcal{C}$</li>
 </ul>
+<h3 id="Misc:_Classes_of_differentiable_functions">Misc: Classes of differentiable functions</h3><p>Let $Q \subset \mathbb{R}^n$, we denote $f \in C_L^{k, p}(Q)$ if</p>
+<ul>
+<li>$f$ is <em>k</em> times continuously differentiable on $Q$</li>
+<li>Its <em>p</em>th derivative is Lipschitz continuous on $Q$ with constant $L$<br>Intuitively, the Lipschitz continuity limits how fast the functions can change</li>
+</ul>
 </span>
       
     </div>
@@ -281,6 +286,8 @@
       
         <div class="post-nav">
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/10/19/Notes-on-Convex-Optimization-2-Local-Methods-Especially-First-Order-Methods/" rel="prev">Notes on Convex Optimization(2): Local Methods, Especially First-Order Methods</a>
             
           </div>
 
@@ -352,7 +359,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">5</span>
+              <span class="site-state-item-count">6</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
@@ -394,7 +401,7 @@
           <div class="post-toc">
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#What’s_in_this_book"><span class="nav-number">1.</span> <span class="nav-text">What’s in this book</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Chapter_1_–_Nonlinear_Optimization"><span class="nav-number">2.</span> <span class="nav-text">Chapter 1 – Nonlinear Optimization</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#General_formulation_of_the_problem"><span class="nav-number">2.1.</span> <span class="nav-text">General formulation of the problem</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#“In_general,_optimization_problems_are_unsolvable”"><span class="nav-number">2.2.</span> <span class="nav-text">“In general, optimization problems are unsolvable”</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Performance_of_numerical_methods"><span class="nav-number">2.2.1.</span> <span class="nav-text">Performance of numerical methods</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Complexity_bounds_for_global_optimization"><span class="nav-number">2.2.2.</span> <span class="nav-text">Complexity bounds for global optimization</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#What’s_in_this_book"><span class="nav-number">1.</span> <span class="nav-text">What’s in this book</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Chapter_1_–_Nonlinear_Optimization"><span class="nav-number">2.</span> <span class="nav-text">Chapter 1 – Nonlinear Optimization</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#General_formulation_of_the_problem"><span class="nav-number">2.1.</span> <span class="nav-text">General formulation of the problem</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#“In_general,_optimization_problems_are_unsolvable”"><span class="nav-number">2.2.</span> <span class="nav-text">“In general, optimization problems are unsolvable”</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Performance_of_numerical_methods"><span class="nav-number">2.2.1.</span> <span class="nav-text">Performance of numerical methods</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Complexity_bounds_for_global_optimization"><span class="nav-number">2.2.2.</span> <span class="nav-text">Complexity bounds for global optimization</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Misc:_Classes_of_differentiable_functions"><span class="nav-number">2.3.</span> <span class="nav-text">Misc: Classes of differentiable functions</span></a></li></ol></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator"></div>
