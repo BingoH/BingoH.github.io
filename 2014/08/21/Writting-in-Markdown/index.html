@@ -168,7 +168,7 @@
       <div class="post-meta">
         <span class="post-time">
           Posted on
-          <time itemprop="dateCreated" datetime="2014-08-21T11:01:25+08:00" content="2014-08-21">
+          <time itemprop="dateCreated" datetime="2014-08-21T11:01:25-04:00" content="2014-08-21">
             2014-08-21
           </time>
         </span>
@@ -211,20 +211,27 @@
       
         <span itemprop="articleBody"><p>Writing with <a href="http://daringfireball.net/projects/markdown/" target="_blank" rel="external">markdown</a> is not quite hard. It is a text-to-HTML conversion tools for web writers. Actually, Hexo and many other static blogs have markdown support. I mark down some basic usage for reference, from <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet" target="_blank" rel="external">Markdown Cheetsheet</a> and the <a href="http://daringfireball.net/projects/markdown/dingus" target="_blank" rel="external">original sepc</a>.</p>
 <a id="more"></a>
-<h3 id="Headers">Headers</h3><figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line"><span class="header"># H1</span></span><br><span class="line"><span class="header">## H2</span></span><br><span class="line"><span class="header">### H3</span></span><br><span class="line">......</span><br><span class="line"></span><br><span class="line">Alternatively, for H1 and H2, an underline-ish style:</span><br><span class="line"></span><br><span class="line"><span class="header">Alt-H1</span><br><span class="line">======</span></span><br><span class="line"></span><br><span class="line"><span class="header">Alt-H2</span><br><span class="line">------</span></span><br></pre></td></tr></table></figure>
-<h3 id="Emphasis">Emphasis</h3><figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">Emphasis, aka italics, with <span class="emphasis">*asterisks*</span> or <span class="emphasis">_underscores_</span>.</span><br><span class="line"></span><br><span class="line">Strong emphasis, aka bold, with <span class="strong">**asterisks**</span> or <span class="strong">__underscores__</span>.</span><br><span class="line"></span><br><span class="line">Combined emphasis with <span class="strong">**asterisks and _underscores_*</span>*.</span><br><span class="line"></span><br><span class="line">Strikethrough uses two tildes. ~~Scratch this.~~</span><br></pre></td></tr></table></figure>
+<h3>Headers</h3>
+<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line"><span class="header"># H1</span></span><br><span class="line"><span class="header">## H2</span></span><br><span class="line"><span class="header">### H3</span></span><br><span class="line">......</span><br><span class="line"></span><br><span class="line">Alternatively, for H1 and H2, an underline-ish style:</span><br><span class="line"></span><br><span class="line"><span class="header">Alt-H1</span><br><span class="line">======</span></span><br><span class="line"></span><br><span class="line"><span class="header">Alt-H2</span><br><span class="line">------</span></span><br></pre></td></tr></table></figure>
+<h3>Emphasis</h3>
+<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">Emphasis, aka italics, with <span class="emphasis">*asterisks*</span> or <span class="emphasis">_underscores_</span>.</span><br><span class="line"></span><br><span class="line">Strong emphasis, aka bold, with <span class="strong">**asterisks**</span> or <span class="strong">__underscores__</span>.</span><br><span class="line"></span><br><span class="line">Combined emphasis with <span class="strong">**asterisks and _underscores_*</span>*.</span><br><span class="line"></span><br><span class="line">Strikethrough uses two tildes. ~~Scratch this.~~</span><br></pre></td></tr></table></figure>
 <p>However, maybe it’s better to use bold all the time as <a href="http://stanstarks.github.io/howtos/markdown.html" target="_blank" rel="external">stanstarks</a>. :-)</p>
-<h3 id="Lists">Lists</h3><figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line"><span class="bullet">1. </span>First ordered list item</span><br><span class="line"><span class="bullet">2. </span>Another item</span><br><span class="line"></span><br><span class="line"><span class="bullet">* </span>Unordered list can use asterisks</span><br><span class="line"><span class="bullet">- </span>Or minuses</span><br><span class="line"><span class="bullet">+ </span>Or pluses</span><br></pre></td></tr></table></figure>
-<h3 id="Links_and_Images">Links and Images</h3><ul>
-<li><p>Links</p>
-<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">[<span class="link_label">I'm an inline-style link</span>](<span class="link_url">https://www.google.com</span>)</span><br><span class="line"></span><br><span class="line">[<span class="link_label">I'm a reference-style link</span>][<span class="link_reference">Arbitrary case-insensitive reference text</span>]</span><br><span class="line"></span><br><span class="line">[<span class="link_label">I'm a relative reference to a repository file</span>](<span class="link_url">../blob/master/LICENSE</span>)</span><br><span class="line"></span><br><span class="line">[<span class="link_label">You can use numbers for reference-style link definitions</span>][<span class="link_reference">1</span>]</span><br><span class="line"></span><br><span class="line">Or leave it empty and use the [link text itself]</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>Images</p>
-<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">Here's our logo (hover to see the title text):</span><br><span class="line"></span><br><span class="line">Inline-style: </span><br><span class="line">![<span class="link_label">alt text</span>](<span class="link_url">https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 1"</span>)</span><br><span class="line"></span><br><span class="line">Reference-style: </span><br><span class="line">![<span class="link_label">alt text</span>][<span class="link_reference">logo</span>]</span><br></pre></td></tr></table></figure>
-</li>
+<h3>Lists</h3>
+<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line"><span class="bullet">1. </span>First ordered list item</span><br><span class="line"><span class="bullet">2. </span>Another item</span><br><span class="line"></span><br><span class="line"><span class="bullet">* </span>Unordered list can use asterisks</span><br><span class="line"><span class="bullet">- </span>Or minuses</span><br><span class="line"><span class="bullet">+ </span>Or pluses</span><br></pre></td></tr></table></figure>
+<h3>Links and Images</h3>
+<ul>
+<li>Links</li>
 </ul>
-<h3 id="Horizontal_Rules">Horizontal Rules</h3><p>Three or more dashes or asterisks:<br><figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line"><span class="horizontal_rule">---</span></span><br><span class="line"></span><br><span class="line"><span class="bullet">* </span><span class="bullet">* *</span></span><br><span class="line"></span><br><span class="line"><span class="bullet">- </span>- - -</span><br></pre></td></tr></table></figure></p>
-<h3 id="Manual_Line_Breaks">Manual Line Breaks</h3><p>End a line with two or more spaces</p>
+<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">[<span class="link_label">I'm an inline-style link</span>](<span class="link_url">https://www.google.com</span>)</span><br><span class="line"></span><br><span class="line">[<span class="link_label">I'm a reference-style link</span>][<span class="link_reference">Arbitrary case-insensitive reference text</span>]</span><br><span class="line"></span><br><span class="line">[<span class="link_label">I'm a relative reference to a repository file</span>](<span class="link_url">../blob/master/LICENSE</span>)</span><br><span class="line"></span><br><span class="line">[<span class="link_label">You can use numbers for reference-style link definitions</span>][<span class="link_reference">1</span>]</span><br><span class="line"></span><br><span class="line">Or leave it empty and use the [link text itself]</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Images</li>
+</ul>
+<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">Here's our logo (hover to see the title text):</span><br><span class="line"></span><br><span class="line">Inline-style: </span><br><span class="line">![<span class="link_label">alt text</span>](<span class="link_url">https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 1"</span>)</span><br><span class="line"></span><br><span class="line">Reference-style: </span><br><span class="line">![<span class="link_label">alt text</span>][<span class="link_reference">logo</span>]</span><br></pre></td></tr></table></figure>
+<h3>Horizontal Rules</h3>
+<p>Three or more dashes or asterisks:</p>
+<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line"><span class="horizontal_rule">---</span></span><br><span class="line"></span><br><span class="line"><span class="bullet">* </span><span class="bullet">* *</span></span><br><span class="line"></span><br><span class="line"><span class="bullet">- </span>- - -</span><br></pre></td></tr></table></figure>
+<h3>Manual Line Breaks</h3>
+<p>End a line with two or more spaces</p>
 </span>
       
     </div>
@@ -314,21 +321,21 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">6</span>
+              <span class="site-state-item-count">7</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
 
           <div class="site-state-item site-state-categories">
             
-              <span class="site-state-item-count">5</span>
+              <span class="site-state-item-count">4</span>
               <span class="site-state-item-name">categories</span>
               
           </div>
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">12</span>
+              <span class="site-state-item-count">10</span>
               <span class="site-state-item-name">tags</span>
               </a>
           </div>
@@ -356,7 +363,7 @@
           <div class="post-toc">
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Headers"><span class="nav-number">1.</span> <span class="nav-text">Headers</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Emphasis"><span class="nav-number">2.</span> <span class="nav-text">Emphasis</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Lists"><span class="nav-number">3.</span> <span class="nav-text">Lists</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Links_and_Images"><span class="nav-number">4.</span> <span class="nav-text">Links and Images</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Horizontal_Rules"><span class="nav-number">5.</span> <span class="nav-text">Horizontal Rules</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Manual_Line_Breaks"><span class="nav-number">6.</span> <span class="nav-text">Manual Line Breaks</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">Headers</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.</span> <span class="nav-text">Emphasis</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">3.</span> <span class="nav-text">Lists</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">4.</span> <span class="nav-text">Links and Images</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">5.</span> <span class="nav-text">Horizontal Rules</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">6.</span> <span class="nav-text">Manual Line Breaks</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator"></div>
@@ -373,7 +380,7 @@
       <div class="footer-inner"> <div class="copyright" >
   
   &copy; &nbsp; 
-  <span itemprop="copyrightYear">2015</span>
+  <span itemprop="copyrightYear">2017</span>
   <span class="with-love">
     <i class="icon-next-heart"></i>
   </span>

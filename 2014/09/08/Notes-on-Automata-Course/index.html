@@ -43,14 +43,16 @@
 
 <meta name="description" content="上个学期修了计算理论课程，但结果没有去上过几次课，最后勉强没有挂科。但实际上，计算理论是CS之所以能成为科学的重要基础，也是CS中非常有趣的部分。因此选了Coursera的Automata课程，由Stanford的Jeff Ullman教授讲课。教授自然是大神，传说中的龙书（《编译原理》）的作者，当然半路出家的我并没有拜读过，不过封面真是赞啊。
 What’s in this course
-Regu">
+
+Reg">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Notes on Automata - Week 1">
 <meta property="og:url" content="https://bingoh.github.io/2014/09/08/Notes-on-Automata-Course/index.html">
 <meta property="og:site_name" content="Bingo.H's blog">
 <meta property="og:description" content="上个学期修了计算理论课程，但结果没有去上过几次课，最后勉强没有挂科。但实际上，计算理论是CS之所以能成为科学的重要基础，也是CS中非常有趣的部分。因此选了Coursera的Automata课程，由Stanford的Jeff Ullman教授讲课。教授自然是大神，传说中的龙书（《编译原理》）的作者，当然半路出家的我并没有拜读过，不过封面真是赞啊。
 What’s in this course
-Regu">
+
+Reg">
 <meta property="og:image" content="https://bingoh.github.io/images/automata/tennis.png">
 <meta property="og:image" content="https://bingoh.github.io/images/automata/epsilon_nfa.png">
 <meta property="og:updated_time" content="2015-09-29T02:26:25.000Z">
@@ -58,7 +60,8 @@ Regu">
 <meta name="twitter:title" content="Notes on Automata - Week 1">
 <meta name="twitter:description" content="上个学期修了计算理论课程，但结果没有去上过几次课，最后勉强没有挂科。但实际上，计算理论是CS之所以能成为科学的重要基础，也是CS中非常有趣的部分。因此选了Coursera的Automata课程，由Stanford的Jeff Ullman教授讲课。教授自然是大神，传说中的龙书（《编译原理》）的作者，当然半路出家的我并没有拜读过，不过封面真是赞啊。
 What’s in this course
-Regu">
+
+Reg">
 
 
 <script type="text/javascript" id="hexo.configuration">
@@ -176,7 +179,7 @@ Regu">
       <div class="post-meta">
         <span class="post-time">
           Posted on
-          <time itemprop="dateCreated" datetime="2014-09-08T01:19:41+08:00" content="2014-09-08">
+          <time itemprop="dateCreated" datetime="2014-09-08T01:19:41-04:00" content="2014-09-08">
             2014-09-08
           </time>
         </span>
@@ -218,24 +221,29 @@ Regu">
 
       
         <span itemprop="articleBody"><p>上个学期修了计算理论课程，但结果没有去上过几次课，最后勉强没有挂科。但实际上，计算理论是CS之所以能成为科学的重要基础，也是CS中非常有趣的部分。因此选了<a href="https://www.coursera.org/" target="_blank" rel="external">Coursera</a>的<a href="https://class.coursera.org/automata" target="_blank" rel="external">Automata</a>课程，由Stanford的<a href="http://infolab.stanford.edu/~ullman/" target="_blank" rel="external">Jeff Ullman</a>教授讲课。教授自然是大神，传说中的<a href="http://book.douban.com/subject/1134994/" target="_blank" rel="external">龙书</a>（《编译原理》）的作者，当然半路出家的我并没有拜读过，不过封面真是赞啊。</p>
-<h2 id="What’s_in_this_course">What’s in this course</h2><ul>
-<li>Regular languages and their descriptors<ul>
+<h2>What’s in this course</h2>
+<ul>
+<li>Regular languages and their descriptors
+<ul>
 <li>Finite Automata, nondeterministic finite automata, regular expressions</li>
 <li>Algorithms to decide questions about regular languages, e.g., is it empty?</li>
 <li>Closure properties of regular languages</li>
 </ul>
 </li>
-<li>Context-free languages and their descriptors<ul>
+<li>Context-free languages and their descriptors
+<ul>
 <li>Context-free grammars, pushdown automata</li>
 <li>Decisions and closure properties</li>
 </ul>
 </li>
-<li>Recursive and recursively enumerable languages<ul>
+<li>Recursive and recursively enumerable languages
+<ul>
 <li>Turing machines, deciability of problems</li>
 <li>The limit of what can be computed</li>
 </ul>
 </li>
-<li>Intractable problems<ul>
+<li>Intractable problems
+<ul>
 <li>Problems that (appear to) require exponential time</li>
 <li>NP-completeness and beyond</li>
 </ul>
@@ -247,7 +255,9 @@ Regu">
 <li>But among optional courses, CS154 (Automata and Complexity Theory) stood remarkably high.</li>
 </ul>
 <a id="more"></a>
-<h2 id="Week_1_Snippets_–_Introduction_to_Finite_Automata">Week 1 Snippets – Introduction to Finite Automata</h2><h3 id="Introduction">Introduction</h3><p><strong>What is a Finite Automaton</strong></p>
+<h2>Week 1 Snippets – Introduction to Finite Automata</h2>
+<h3>Introduction</h3>
+<p><strong>What is a Finite Automaton</strong></p>
 <ul>
 <li>A formal system</li>
 <li>Remembers only a finite amount of information</li>
@@ -255,34 +265,50 @@ Regu">
 <li>State changes in response to <strong>input</strong></li>
 <li>Rules that tell how the state changes in response to inputs are called <strong>transitions</strong></li>
 </ul>
-<p><strong>An Example</strong><br>A Tennis consists of 3-5 sets, each of which contains 6 or more games. To score a game, one player serves throughout. To win, you must score at least 4 points. Meanwhile, you must win by at least 2 points.<br>Suppose the inputs are s = “server wins points” and o = “opponent wins points”. Then all states and transitions can be represented as follow graph.<br><img src="/images/automata/tennis.png" alt=""><br>The game starts from state “Love”, and ends when either server or opponent wins, which represents <strong>end states</strong>. The automaton accepts strings which a winner is decided. If neither player can lead by 2 points, the game would transform back and forth between “deuce” and “Ad-in” or “Ad-out”. By the way, the Isner–Mahut match at the 2010 Wimbledon Championships holds the record for the <a href="http://en.wikipedia.org/wiki/Longest_tennis_match_records" target="_blank" rel="external">longest tennis match</a>, which lasts for 11 hours, 5 minutes, in 3 days, with the final score 70-68. I happens to watch the news at that time, and how time flies.</p>
+<p><strong>An Example</strong><br>
+A Tennis consists of 3-5 sets, each of which contains 6 or more games. To score a game, one player serves throughout. To win, you must score at least 4 points. Meanwhile, you must win by at least 2 points.<br>
+Suppose the inputs are s = “server wins points” and o = “opponent wins points”. Then all states and transitions can be represented as follow graph.<br>
+<img src="/images/automata/tennis.png" alt=""><br>
+The game starts from state “Love”, and ends when either server or opponent wins, which represents <strong>end states</strong>. The automaton accepts strings which a winner is decided. If neither player can lead by 2 points, the game would transform back and forth between “deuce” and “Ad-in” or “Ad-out”. By the way, the Isner–Mahut match at the 2010 Wimbledon Championships holds the record for the <a href="http://en.wikipedia.org/wiki/Longest_tennis_match_records" target="_blank" rel="external">longest tennis match</a>, which lasts for 11 hours, 5 minutes, in 3 days, with the final score 70-68. I happens to watch the news at that time, and how time flies.</p>
 <p><strong>Language of an Automaton</strong></p>
 <ul>
 <li>The set of strings accepted by an automaton A is the <strong>language</strong> of A. Denoted as L(A).</li>
 <li>Different set of final states =&gt; different languages.</li>
 <li>Example: As designed, L(Tennis) = strings that determine the winner.</li>
 </ul>
-<h3 id="Deterministic_Finite_Automata">Deterministic Finite Automata</h3><p><strong>Alphabets, Strings, Languages</strong></p>
+<h3>Deterministic Finite Automata</h3>
+<p><strong>Alphabets, Strings, Languages</strong></p>
 <ul>
 <li>An <strong>alphabet</strong> is any finite set of symbols, e.g. {0, 1}.</li>
 <li>A <strong>String</strong> over an alphabet $\Sigma$ is a list, each element of which is a member of $\Sigma$, e.g. 01001, $\epsilon$ (empty string).</li>
 <li>A <strong>Language</strong> is a subset of $\Sigma^*$ (set of all strings) for alphabet $\Sigma$.</li>
 </ul>
-<p><strong>DFA</strong><br>A formalism for defining languages, consists of</p>
+<p><strong>DFA</strong><br>
+A formalism for defining languages, consists of</p>
 <ol>
 <li>A finite set of <strong>states</strong>, $Q$</li>
 <li>An <strong>input alphabet</strong>, $\Sigma$</li>
 <li>A <strong>transition function</strong>, $\delta$</li>
 <li>A <strong>start state</strong>, $q_0$</li>
-<li>A set of <strong>final state</strong>, $F$<br>Where the transition function $\delta$ takes a state $q$ and an input symbol $a$, and output the state that the DFA goes to when $q$ and $a$ received. A DFA can also be represented as graph, and transition table.</li>
+<li>A set of <strong>final state</strong>, $F$<br>
+Where the transition function $\delta$ takes a state $q$ and an input symbol $a$, and output the state that the DFA goes to when $q$ and $a$ received. A DFA can also be represented as graph, and transition table.</li>
 </ol>
 <p><strong>Language of DFA</strong></p>
 <ul>
 <li>Automaton of all kinds defines languages</li>
-<li>$L(A)$ is the set of strings labeling paths from the start state to a final state, or formally<br>$$<br>L(A) = \{w | \, \delta(q_0, w) \in F\}<br>$$<br>The transition function on string $w = xa, \, a \in Q$ can be computed recursively,<br>$$<br>\delta(q_0, w) = \delta(\delta(q_0, x), a)<br>$$</li>
+<li>$L(A)$ is the set of strings labeling paths from the start state to a final state, or formally<br>
+$$<br>
+L(A) = \{w | , \delta(q_0, w) \in F\}<br>
+$$<br>
+The transition function on string $w = xa, , a \in Q$ can be computed recursively,<br>
+$$<br>
+\delta(q_0, w) = \delta(\delta(q_0, x), a)<br>
+$$</li>
 </ul>
-<p><strong>Regular Language</strong><br>A language $L$ is <strong>regular</strong> if it is the language accepted by some DFA. Unfortunately, there exists non-regular languages, for example, $L_1 = \{0^n1^n | \, n \geq 1\}$.</p>
-<h3 id="Nondeterministic_Finite_Automata">Nondeterministic Finite Automata</h3><p>A <strong>nondeterministic finite automata</strong> has the ability to be in serval states at once, which means transitions from a state on an input symbol can be to any set of states. The NFA also start in one start state, and accept a string if <strong>any sequence of choices of transitions</strong> leads to a final state. The intuition is that the NFA always “guesses right”. Formally, an NFA is</p>
+<p><strong>Regular Language</strong><br>
+A language $L$ is <strong>regular</strong> if it is the language accepted by some DFA. Unfortunately, there exists non-regular languages, for example, $L_1 = \{0^n1^n | \, n \geq 1\}$.</p>
+<h3>Nondeterministic Finite Automata</h3>
+<p>A <strong>nondeterministic finite automata</strong> has the ability to be in serval states at once, which means transitions from a state on an input symbol can be to any set of states. The NFA also start in one start state, and accept a string if <strong>any sequence of choices of transitions</strong> leads to a final state. The intuition is that the NFA always “guesses right”. Formally, an NFA is</p>
 <ol>
 <li>A finite set of states, $Q$</li>
 <li>An input alphabet, $\Sigma$</li>
@@ -291,16 +317,22 @@ Regu">
 <li>A set of final states $F \subset Q$</li>
 </ol>
 <p>Now, $\delta(q, a)$ is a set of states, contains all the states the NFA can go to, when in state $q$ and symbol $a$ received. The extended transition $\delta(q_0, xa) = \cup \delta(p, a),\, p \in \delta(q_0, x)$, with the basis $\delta(q_0, \epsilon) = \{q_0\}$.</p>
-<p><strong>Equivalence of NFA and DFA</strong><br>It seems that NFA can represent more languages, since a NFA now can go to multiple states by one step. But it turns out surprisely that <strong>for any DFA, there is a DFA accepts the same languages</strong>. The contraverse is obvious, thus DFAs and NFAs represents the same kind of languages, regular language.<br>Proof Sketch: For a NFA $(Q, \Sigma, \delta_N, q_0, F)$, construct the equivalent DFA using <strong>subset construction</strong> with</p>
+<p><strong>Equivalence of NFA and DFA</strong><br>
+It seems that NFA can represent more languages, since a NFA now can go to multiple states by one step. But it turns out surprisely that <strong>for any DFA, there is a DFA accepts the same languages</strong>. The contraverse is obvious, thus DFAs and NFAs represents the same kind of languages, regular language.<br>
+Proof Sketch: For a NFA $(Q, \Sigma, \delta_N, q_0, F)$, construct the equivalent DFA using <strong>subset construction</strong> with</p>
 <ul>
 <li>States: $2^Q$ (each state is a subset of $Q$)</li>
 <li>Inputs: $\Sigma$</li>
 <li>Start states: $\{q_0\}$</li>
 <li>Final states = all those (subset of $Q$) contains a member of $F$</li>
-<li>Transition function $\delta_D(\{q_1, \ldots, q_k\}, a) = \cup \delta_N(q_i, a), \, i = 1, \ldots, k$.<br>Then the NFA and DFA accepts the same language. It can be proved by induction on $|w|$ that $\delta_N(q_0, w) = \delta_D(q_0, w)$, thus the NFA and DFA accepts the same strings.</li>
+<li>Transition function $\delta_D(\{q_1, \ldots, q_k\}, a) = \cup \delta_N(q_i, a), \, i = 1, \ldots, k$.<br>
+Then the NFA and DFA accepts the same language. It can be proved by induction on $|w|$ that $\delta_N(q_0, w) = \delta_D(q_0, w)$, thus the NFA and DFA accepts the same strings.</li>
 </ul>
-<h3 id="NFA_with_$\epsilon$-Transitions">NFA with $\epsilon$-Transitions</h3><p>We can even allow state-to-state transition on $\epsilon$ input, these transitions are done spontaneously, without looking at the input string. Again, the extension only accepts regular language. It can be proved that for any $\epsilon$-NFA, there is a NFA which accepts the same language. The intuition is that we can combine the $\epsilon$-transitions with the next transition on real input. And the prove is also completed with induction.<br><img src="/images/automata/epsilon_nfa.png" alt=""></p>
-<h3 id="Remark">Remark</h3><ul>
+<h3>NFA with $\epsilon$-Transitions</h3>
+<p>We can even allow state-to-state transition on $\epsilon$ input, these transitions are done spontaneously, without looking at the input string. Again, the extension only accepts regular language. It can be proved that for any $\epsilon$-NFA, there is a NFA which accepts the same language. The intuition is that we can combine the $\epsilon$-transitions with the next transition on real input. And the prove is also completed with induction.<br>
+<img src="/images/automata/epsilon_nfa.png" alt=""></p>
+<h3>Remark</h3>
+<ul>
 <li>Not so obviously, the DFA, NFA, $\epsilon$-NFA accepts exactly the same class of languages: the regular language, although the last two seem to be more powerful. It seems that regular languages is a boundary for finite automatas, which has no memory to remember previous states and symbols, and only finite states available.</li>
 <li>The NFA types are easier design, and may have exponential fewer states than a equivalent DFA (see subset construction).</li>
 <li>Only a DFA can be implemented until now.</li>
@@ -396,21 +428,21 @@ Regu">
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">6</span>
+              <span class="site-state-item-count">7</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
 
           <div class="site-state-item site-state-categories">
             
-              <span class="site-state-item-count">5</span>
+              <span class="site-state-item-count">4</span>
               <span class="site-state-item-name">categories</span>
               
           </div>
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">12</span>
+              <span class="site-state-item-count">10</span>
               <span class="site-state-item-name">tags</span>
               </a>
           </div>
@@ -438,7 +470,7 @@ Regu">
           <div class="post-toc">
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#What’s_in_this_course"><span class="nav-number">1.</span> <span class="nav-text">What’s in this course</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Week_1_Snippets_–_Introduction_to_Finite_Automata"><span class="nav-number">2.</span> <span class="nav-text">Week 1 Snippets – Introduction to Finite Automata</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Introduction"><span class="nav-number">2.1.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Deterministic_Finite_Automata"><span class="nav-number">2.2.</span> <span class="nav-text">Deterministic Finite Automata</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Nondeterministic_Finite_Automata"><span class="nav-number">2.3.</span> <span class="nav-text">Nondeterministic Finite Automata</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#NFA_with_$\epsilon$-Transitions"><span class="nav-number">2.4.</span> <span class="nav-text">NFA with $\epsilon$-Transitions</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Remark"><span class="nav-number">2.5.</span> <span class="nav-text">Remark</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">What’s in this course</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">2.</span> <span class="nav-text">Week 1 Snippets – Introduction to Finite Automata</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.1.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.2.</span> <span class="nav-text">Deterministic Finite Automata</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.3.</span> <span class="nav-text">Nondeterministic Finite Automata</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.4.</span> <span class="nav-text">NFA with $\epsilon$-Transitions</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.5.</span> <span class="nav-text">Remark</span></a></li></ol></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator"></div>
@@ -455,7 +487,7 @@ Regu">
       <div class="footer-inner"> <div class="copyright" >
   
   &copy; &nbsp; 
-  <span itemprop="copyrightYear">2015</span>
+  <span itemprop="copyrightYear">2017</span>
   <span class="with-love">
     <i class="icon-next-heart"></i>
   </span>

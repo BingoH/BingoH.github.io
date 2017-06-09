@@ -41,18 +41,17 @@
   <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.1" />
 
 
-<meta name="description" content="最近开始学习凸优化，虽然作为数学系的学生曾上过数值优化课，但当时学得是“稀里糊涂”(in boss’s words)。当然以前也没有认识到数值优化的应用，现转为初级码农，从业ML，遂得知优化之实用(当然主要是每年paper无数)，重头学习凸优化。目前正在看Yurii Nesterov所编的教材的Introductory Lectures on Convex Optimization: A Basi">
+<meta name="description" content="This is a non-state-of-art read through of Stochastic Variance Reduced Gradient (SVRG) [1] method. Gradient descent and stochastic gradient descent (SGD) plays the most important role in optimization">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Notes on Convex Optimization">
-<meta property="og:url" content="https://bingoh.github.io/2015/03/17/Notes-on-Convex-Optimization/index.html">
+<meta property="og:title" content="Stochastic Variance Reduced Gradient (SVRG)">
+<meta property="og:url" content="https://bingoh.github.io/2017/06/08/Stochastic-Variance-Reduced-Gradient-SVRG/index.html">
 <meta property="og:site_name" content="Bingo.H's blog">
-<meta property="og:description" content="最近开始学习凸优化，虽然作为数学系的学生曾上过数值优化课，但当时学得是“稀里糊涂”(in boss’s words)。当然以前也没有认识到数值优化的应用，现转为初级码农，从业ML，遂得知优化之实用(当然主要是每年paper无数)，重头学习凸优化。目前正在看Yurii Nesterov所编的教材的Introductory Lectures on Convex Optimization: A Basi">
-<meta property="og:image" content="https://bingoh.github.io/images/convxopt/general_iter_scheme.png">
-<meta property="og:image" content="https://bingoh.github.io/images/convxopt/lipshitz_class.png">
-<meta property="og:updated_time" content="2017-06-08T23:07:01.000Z">
+<meta property="og:description" content="This is a non-state-of-art read through of Stochastic Variance Reduced Gradient (SVRG) [1] method. Gradient descent and stochastic gradient descent (SGD) plays the most important role in optimization">
+<meta property="og:image" content="https://bingoh.github.io/images/convxopt/svrg.png">
+<meta property="og:updated_time" content="2017-06-09T04:21:56.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Notes on Convex Optimization">
-<meta name="twitter:description" content="最近开始学习凸优化，虽然作为数学系的学生曾上过数值优化课，但当时学得是“稀里糊涂”(in boss’s words)。当然以前也没有认识到数值优化的应用，现转为初级码农，从业ML，遂得知优化之实用(当然主要是每年paper无数)，重头学习凸优化。目前正在看Yurii Nesterov所编的教材的Introductory Lectures on Convex Optimization: A Basi">
+<meta name="twitter:title" content="Stochastic Variance Reduced Gradient (SVRG)">
+<meta name="twitter:description" content="This is a non-state-of-art read through of Stochastic Variance Reduced Gradient (SVRG) [1] method. Gradient descent and stochastic gradient descent (SGD) plays the most important role in optimization">
 
 
 <script type="text/javascript" id="hexo.configuration">
@@ -62,7 +61,7 @@
   };
 </script>
 
-  <title> Notes on Convex Optimization | Bingo.H's blog </title>
+  <title> Stochastic Variance Reduced Gradient (SVRG) | Bingo.H's blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="en">
@@ -161,7 +160,7 @@
           
           
             
-              Notes on Convex Optimization
+              Stochastic Variance Reduced Gradient (SVRG)
             
           
         </h1>
@@ -170,8 +169,8 @@
       <div class="post-meta">
         <span class="post-time">
           Posted on
-          <time itemprop="dateCreated" datetime="2015-03-17T00:12:00-04:00" content="2015-03-17">
-            2015-03-17
+          <time itemprop="dateCreated" datetime="2017-06-08T16:35:16-04:00" content="2017-06-08">
+            2017-06-08
           </time>
         </span>
 
@@ -196,8 +195,8 @@
           
             <span class="post-comments-count">
             &nbsp; | &nbsp;
-            <a href="/2015/03/17/Notes-on-Convex-Optimization/#comments" itemprop="discussionUrl">
-              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/03/17/Notes-on-Convex-Optimization/" itemprop="commentsCount"></span>
+            <a href="/2017/06/08/Stochastic-Variance-Reduced-Gradient-SVRG/#comments" itemprop="discussionUrl">
+              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/06/08/Stochastic-Variance-Reduced-Gradient-SVRG/" itemprop="commentsCount"></span>
             </a>
           </span>
           
@@ -211,83 +210,87 @@
       
 
       
-        <span itemprop="articleBody"><p>最近开始学习凸优化，虽然作为数学系的学生曾上过数值优化课，但当时学得是“稀里糊涂”(in boss’s words)。当然以前也没有认识到数值优化的应用，现转为初级码农，从业ML，遂得知优化之实用(当然主要是每年paper无数)，重头学习凸优化。目前正在看<a href="http://www.uclouvain.be/32349.html" target="_blank" rel="external">Yurii Nesterov</a>所编的教材的<a href="http://book.douban.com/subject/1834645/" target="_blank" rel="external">Introductory Lectures on Convex Optimization: A Basic Course</a>，为免看完即忘，因此作了笔记。</p>
-<h2>What’s in this book</h2>
-<ul>
-<li>General optimization problems (Unfortunately “unsolvable”)</li>
-<li>Smooth convex optimization</li>
-<li>Nonsmooth convex optimization</li>
-<li>Convex minimization problems with explicit structure</li>
-</ul>
-<p>PS: Goals of this course (from Introduction section):</p>
-<ul>
-<li>Show that: despite their attraction, the proposed “solutions” of general optimization problems very often cannot satisfy the expectations of a naive user. The main face, which should be known to any person dealing with optimization models, is that in general <strong>optimization problems are unsolvable</strong>. (The reality is always cruel)</li>
-<li>Discussing methods for <strong>solvable nonlinear models</strong>, namely <strong>convex optimization problems</strong>.</li>
-</ul>
+        <span itemprop="articleBody"><p>This is a non-state-of-art read through of Stochastic Variance Reduced Gradient (SVRG) <sup class="footnote-ref"><a href="#fn1" id="fnref1">[1]</a></sup> method. Gradient descent and stochastic gradient descent (SGD) plays the most important role in optimization of machine learning problems. With large scale datasets, especially in deep learning applications, SGD and its variants maybe the only practical choice. This paper proposes to accelerate the convergence of SGD by reducing the variance of gradient, introduced by random sampling when evaluating gradient. This work has been extended to many other problems, such as non-convex optimization, sparse learning, etc. So this post is just a late bird note.</p>
 <a id="more"></a>
-<h2>Chapter 1 – Nonlinear Optimization</h2>
-<h3>General formulation of the problem</h3>
-<p>Let $x \in \mathbb{R}^n, S \subset \mathbb{R}^n$ and $f_0(x), \ldots, f_m(x)$ be real-valued functions of $x$. We deal with different variants of the following general minimization problem:<br>
-$$<br>
-\min f_0(x), ~ \text{s.t.  } f_j(x) \ \&amp; \ 0, j = 1, \ldots, m; ~ x \in S.<br>
-$$<br>
-where the $\&amp;$ can be $\leq, \geq$ or $=$.</p>
-<h3>“In general, optimization problems are unsolvable”</h3>
-<h4>Performance of numerical methods</h4>
-<p>Usually, the numerical methods are developed for solving many different problems with similar characteristics. Thus, a <strong>performance</strong> of method $\mathcal{M}$ on the whole class $\mathcal{F}$ (of problems) is a natural characteristics of its efficiency.<br>
-Some concepts:</p>
+<h2>Gradient Descent and Stochastic Gradient Descent</h2>
+<p>In machine learning, we usually consider the following optimization problem, $$ \min P(w), \quad P(w) := \frac{1}{n} \sum_{i=1}^n \psi_i(w), $$ where $w$ represents the model parameter and $\psi_i(w)$ is a sequence of loss functions that evaluate the cost of current parameter $w$. Usually, $\psi_i(w)$ depends on training data $(x_i, y_i)$ (supervised learning).</p>
+<p><strong>Examples</strong></p>
 <ul>
-<li>$\Sigma$: A known (for numerical scheme) “part” of problem $\mathcal{P}$ is called the <strong>model</strong> of the problem</li>
-<li>$\mathcal{O}$: The process of collecting the data is called <strong>oracle</strong></li>
+<li>square loss: $\psi(w) = (w^T x_i - y_i)^2$</li>
+<li>log loss: $-y_i \ln(\sigma(w^T x_i)) - (1-y_i) \ln(1- \sigma(w^T x_i)) = \ln(1 + \exp(-y_i w^T x_i))$, $\sigma(\cdot)$ is the sigmoid function</li>
 </ul>
+<p><strong>Gradient Descent</strong><br>
+Gradient descent is derived from the taylor expansion of a function. For smooth $P(w)$, in a small neighborhood of $w_0$, we have $$ P(w) \approx P(w_0) + \langle x - x_0, \nabla f(x_0) \rangle $$</p>
+<p>Or along an arbitrary unit direction $d$, we have for small $t &gt; 0$, $$ P(w_0 + td) \approx P(w_0) + t \nabla P(w_0)^T d $$<br>
+It turns out that for the negative $d = -\nabla P(w_0)$ is a locally descent direction, that is, for small $t&gt;0$, the following inequality holds, $$ P(w_0 - t \nabla P(w_0)) \approx P(w_0) - t \| \nabla P(w_0)\|_2^2 \leq P(w_0) $$</p>
+<p>This leads the standard gradient descent method, $$ w_t = w_{t-1} - \eta_t \nabla P(w_{t-1}) $$<br>
+In our problem, we have $\nabla P(w_{t-1}) = \frac{1}{n} \sum_{i=1}^n \nabla \psi_i(w_{t-1})$. I need another post to review the selection of step length $\eta_t$ (aka. learning rate in machine learning), the convergence of gradient descent and recent theoretical results.</p>
+<p><strong>Stochastic Gradient Descent</strong><br>
+At each step, gradient descent requires evaluations of $n$ derivatives. It is very expensive for large scale problems, which is common in machine leanring. A popular variant is SGD method with the following update rule, $$ w_t = w_{t-1} - \eta_t \nabla \psi_{i_t}(w_{t-1}), $$<br>
+where $i_t$ is randomly drawn from  $\{1, 2, \ldots, n \}$ at each iteration $t$. We have $\mathbb{E}[\nabla \psi_{i_t}(w_{t-1}) | w_{t-1}] = \nabla P(w_{t-1})$.</p>
+<p><strong>Generalized form</strong><br>
+The SGD updating rule can be further generalized, $$ w_t = w_{t-1} - \eta_t g_t(w_{t-1}, \xi_t) $$<br>
+where $\xi_t$ is a random variable that may depend on $w_{t-1}$ and $g_t(\cdot)$ is an approximate gradient. We only require it is an unbiased estimator, $\nabla P(w_{t-1}) = \mathbb{E}_{\xi_t}[g_t(w_{t-1}, \xi_t)|w_{t-1}]$. For example, the widely used mini-batch version, $$ g_t(w_{t-1}, \xi_t) = \frac{1}{m} \sum_{i=1}^m \nabla \psi_{i_m}(w_{t-1}). $$</p>
+<p>Actually, many algorithms use a biased estimator, especially in neural network training. I need another post to reivew the SGD variants and the theoretical results.</p>
+<h2>Why SVRG</h2>
+<p><strong>Disadvantages of GD and SGD</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center"></th>
+<th style="text-align:center">Time Complexity</th>
+<th style="text-align:center">learning rate</th>
+<th style="text-align:center">Convergence Rate (Stronly Convex)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">GD</td>
+<td style="text-align:center">n gradient evaluataion</td>
+<td style="text-align:center">const.</td>
+<td style="text-align:center">O(log t)</td>
+</tr>
+<tr>
+<td style="text-align:center">SGD</td>
+<td style="text-align:center">1 gradient evaluation</td>
+<td style="text-align:center">O(1/t)</td>
+<td style="text-align:center">O(1/t)</td>
+</tr>
+</tbody>
+</table>
+<p>As the stochastic gradient is just a random approximation (by a small batch of samples or even a single example) of the batch gradient, we must be careful when updating along the direction. In order to ensure convergence, the learning rate $\eta_t$ has to decay to zero, due to the variance of random sampling. We generally choose $\eta_t = O(1/t)$. Small learning rate leads to solwer sub-linear convergence rate of $O(1/t)$. We have a trade-off between the computation per iteration and convergence rate.</p>
+<p>Fortunately, one can design methods that can reduce the variance of stochastic gradient. This may allow us to use a larger learning rate for SGD.</p>
+<h2>SVRG algorithm</h2>
+<p>The proposed SVRG algorithm updates by the following rule, $$<br>
+w_t = w_{t-1} - \eta_t (\nabla \psi_{i_t}(w_{t-1}) - \nabla \psi_{i_t}(\tilde{w}) + \nabla P(\tilde{w})), $$ where $\tilde{w}$ is a snapshot that is updated every $m$ SGD iterations.</p>
+<p><strong>Intuitions</strong><br>
+If the snapshot $\tilde{w}$ is close to optima $w^\ast$, $\nabla \psi_i(\tilde{w}) \rightarrow \nabla \psi_i(w^\ast)$,</p>
 <ul>
-<li>Zero-order oracle: return function value $f(x)$</li>
-<li>First-order oracle: return $f(x)$ and gradient $f’(x)$</li>
-<li>Second-order oracle: return $f(x), f’(x)$ and Hessian $f’’(x)$</li>
+<li>Let $\tilde{\mu} := \nabla P(\tilde{w})$, then $\tilde{\mu} - \nabla P(w_{t-1}) \approx \nabla \psi_i(\tilde{w}) - \nabla \psi_i(w_{t-1})$. Intuitively, this updating rule cancel the randomness induced by random sampling $i$;</li>
+<li>$\tilde{\mu} \rightarrow 0$ when $\tilde{w} \rightarrow w^\ast$. $\nabla \psi_i(w_{t-1}) - \nabla \psi_i(\tilde{w}) + \tilde{\mu} \rightarrow \nabla \psi_i(w_{t-1}) - \nabla \psi_i(w^\ast) \rightarrow 0$. The infinite small gradient allows to use constant learning rate. However, for SGD, $\nabla \psi_i(w_{t-1})$ may not converge to 0.</li>
 </ul>
+<p><strong>Algorithm</strong><br>
+<img src="/images/convxopt/svrg.png" alt="SVRG"></p>
+<p><strong>Theorem</strong></p>
+<blockquote>
+<p>Suppose $\gamma$-smooth $\psi_i$ and $L$-strongly convex $P(w)$. Let $w^\ast = \arg \min_w P(w)$. We have geometric convergence in expectation for SVRG: $$\mathbb{E} P(\tilde{w}_s) - \mathbb{E} P(w^\ast) \leq \alpha^s (P(\tilde{w}_0) - P(w^\ast))$$ given $m$ is sufficiently large, s.t., $$\alpha = \frac{1}{\gamma \eta m(1-2L\eta)} + \frac{2L \eta}{1-2L \eta} &lt; 1$$</p>
+</blockquote>
+<p>Actually, $m$ is of the same order of $n$ in the paper. Thus it might be more precise to say the following convergence rate, $$ \mathbb{E} P(\tilde{w}_s) - \mathbb{E} P(w^\ast) \leq \alpha^{t/n} (P(\tilde{w}_0) - P(w^\ast))$$</p>
+<h2>Summary</h2>
 <ul>
-<li>$\mathcal{F}$: Problem class $\mathcal{F} \equiv (\Sigma, \mathcal{O}, \mathcal{T}_\epsilon)$, $\mathcal{T}_\epsilon$ is stopping criterion. And $\mathcal{M}$ method’s performance on problem class is its performance on the worst $\mathcal{P}_w$ from $\mathcal{F}$.</li>
-<li>Mesure of complexity of problem $\mathcal{P}$ for method $\mathcal{M}$ (As finding an exact solution is always impossible for numerical optimization, to solve a problem means to find an approximate solution with an accuracy $\epsilon &gt; 0$.)</li>
+<li>Randomness of SGD induces variance of gradient, which leads to decay learning rate and sub-linear convergence rate</li>
+<li>Reducing the variance of stochastic gradient allows to use constant learning rate and obtains linear convergence in expectation</li>
+<li>We donnot need to save the historical gradient $\nabla \psi_{i_1}(w_0), \nabla \psi_{i_2}(w_1), \ldots$ in SVRG. However, the number of gradient evaluation per iteration increases</li>
+<li>SVRG may be applied to non-strongly convex problem, leading a $O(1/T)$ convergence rate (standard SGD $O(1/\sqrt{T})$)</li>
+<li>SVRG can also be used to non-convex optimization problem, such as neural networks training</li>
 </ul>
-<ul>
-<li>Analytical complexity: number of calls of oracle, which is required to solve problem $\mathcal{P}$ up to accuracy $\epsilon$</li>
-<li>Arithmetical complexity: The total number of arithmetic operations (including the work of oracle and work of method), which is required to solve problem $\mathcal{P}$ up to accuracy $\epsilon$</li>
-</ul>
-<p><strong>General Iterative Scheme</strong><br>
-<img src="/images/convxopt/general_iter_scheme.png" alt=""></p>
-<p><strong>Local black box</strong></p>
-<ul>
-<li>The only information available for the numerical scheme is the answer of the oracle</li>
-<li>The orical is local: A small variation of the problem far enough from the test point $x$ does not change the answer at $x$</li>
-</ul>
-<h4>Complexity bounds for global optimization</h4>
-<p>Consider the class of problems $\mathcal{C}$, $\mathbb{R}^n$ equiped with $l_\infty$-norm, $B_n = \{ x \in \mathbb{R}^n | 0 \leq x^{(i)} \leq 1, i = 1, \ldots, m \}$,<br>
-<img src="/images/convxopt/lipshitz_class.png" alt=""><br>
-Then it is proved that the <strong>uniform grid method</strong> is optimal for $\mathcal{C}$, which has a lower bound $(\left \lfloor \frac{L}{2\epsilon} \right \rfloor)^n$. Then for $L=2, n=10, \epsilon = 0.01$ it would take $10^{20}$ calls of oracle (0-order), at least 31, 250, 000 years.</p>
-<p><strong>The lower bounds</strong></p>
-<ul>
-<li>To achieve the stopping criterion, for the worst problem (specific to the method), how many calls of oracles are needed for the method.</li>
-<li>Based on black box concept</li>
-<li>Valid for all reasonable iteative schemes, thus provide us a lower estimate for analytical complexity on the problem class</li>
-<li>Very often employ the idea of <strong>resisting oracle</strong>. A resisting oracle tries to create a worst problem for each particular method.</li>
-</ul>
-<p><strong>The upper complexity</strong></p>
-<ul>
-<li>How many calls of oracles can assure the stopping criterion is achieved, for any problem of the problem class.</li>
-<li>For example, for the Lipschitz continuous functions on $B_n$, the <strong>uniform grid method</strong> has upper bound $(\left \lfloor \frac{L}{2\epsilon} \right \rfloor +2)^n$.</li>
-</ul>
-<p><strong>The optimal method</strong></p>
-<ul>
-<li>The lower and upper bounds coincide up to a constant multiplicative factor</li>
-<li>if $\epsilon = O(\frac{L}{n})$, the <strong>uniform grid method</strong> is an <strong>optimal</strong> method for $\mathcal{C}$</li>
-</ul>
-<h3>Misc: Classes of differentiable functions</h3>
-<p>Let $Q \subset \mathbb{R}^n$, we denote $f \in C_L^{k, p}(Q)$ if</p>
-<ul>
-<li>$f$ is <em>k</em> times continuously differentiable on $Q$</li>
-<li>Its <em>p</em>th derivative is Lipschitz continuous on $Q$ with constant $L$<br>
-Intuitively, the Lipschitz continuity limits how fast the functions can change</li>
-</ul>
+<hr class="footnotes-sep">
+<section class="footnotes">
+<ol class="footnotes-list">
+<li id="fn1" class="footnote-item"><p>Johnson, Rie, and Tong Zhang. “Accelerating stochastic gradient descent using predictive variance reduction.” In Advances in Neural Information Processing Systems, pp. 315-323. 2013. <a href="#fnref1" class="footnote-backref">↩</a></p>
+</li>
+</ol>
+</section>
 </span>
       
     </div>
@@ -305,13 +308,11 @@ Intuitively, the Lipschitz continuity limits how fast the functions can change</
         <div class="post-nav">
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2015/10/21/Notes-on-Convex-Optimization-2-Local-Methods-Especially-First-Order-Methods/" rel="prev">Notes on Convex Optimization (2): Local Methods, Especially First-Order Methods</a>
-            
           </div>
 
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2014/09/19/Notes-on-Automata-Course--Week-2/" rel="next">Notes on Automata - Week 2</a>
+              <a href="/2015/10/21/Notes-on-Convex-Optimization-2-Local-Methods-Especially-First-Order-Methods/" rel="next">Notes on Convex Optimization (2): Local Methods, Especially First-Order Methods</a>
             
           </div>
         </div>
@@ -419,7 +420,7 @@ Intuitively, the Lipschitz continuity limits how fast the functions can change</
           <div class="post-toc">
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">What’s in this book</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">2.</span> <span class="nav-text">Chapter 1 – Nonlinear Optimization</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.1.</span> <span class="nav-text">General formulation of the problem</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.2.</span> <span class="nav-text">“In general, optimization problems are unsolvable”</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">2.2.1.</span> <span class="nav-text">Performance of numerical methods</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">2.2.2.</span> <span class="nav-text">Complexity bounds for global optimization</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.3.</span> <span class="nav-text">Misc: Classes of differentiable functions</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">Gradient Descent and Stochastic Gradient Descent</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">2.</span> <span class="nav-text">Why SVRG</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">3.</span> <span class="nav-text">SVRG algorithm</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">4.</span> <span class="nav-text">Summary</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator"></div>
@@ -473,9 +474,9 @@ Intuitively, the Lipschitz continuity limits how fast the functions can change</
 
     <script type="text/javascript">
       var disqus_shortname = 'BingoH';
-      var disqus_identifier = '2015/03/17/Notes-on-Convex-Optimization/';
-      var disqus_title = 'Notes on Convex Optimization';
-      var disqus_url = 'https://bingoh.github.io/2015/03/17/Notes-on-Convex-Optimization/';
+      var disqus_identifier = '2017/06/08/Stochastic-Variance-Reduced-Gradient-SVRG/';
+      var disqus_title = 'Stochastic Variance Reduced Gradient (SVRG)';
+      var disqus_url = 'https://bingoh.github.io/2017/06/08/Stochastic-Variance-Reduced-Gradient-SVRG/';
 
       function run_disqus_script(disqus_script){
         var dsq = document.createElement('script');

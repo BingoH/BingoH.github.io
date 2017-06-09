@@ -172,7 +172,7 @@
       <div class="post-meta">
         <span class="post-time">
           Posted on
-          <time itemprop="dateCreated" datetime="2014-09-19T00:59:29+08:00" content="2014-09-19">
+          <time itemprop="dateCreated" datetime="2014-09-19T00:59:29-04:00" content="2014-09-19">
             2014-09-19
           </time>
         </span>
@@ -215,30 +215,39 @@
       
         <span itemprop="articleBody"><p>In week 2 of <a href="https://class.coursera.org/automata" target="_blank" rel="external">Automata Course</a>, regular expressions are introduced, along with some applications of regular expressions. Not surprisely, the regular expressions describe exactly the regular languages, the same as Finite Automatas. Also, the properties of regular languages are introduced, including decisions properties and closure properties. The latter indicates that the regular class is closed under operations such as union, intersection, difference, etc, while a decision property for a class of languages is an algorithm that takes a formal description of a language (e.g., DFA) and tells whether or not some property holds. In particular, the pumping lemma is useful to tell whether a language is regular or not.</p>
 <a id="more"></a>
-<h2 id="Week_2_Snippets_–_Regular_Expression_and_Properties_of_Regular_Languages">Week 2 Snippets – Regular Expression and Properties of Regular Languages</h2><h3 id="Regular_Expressions">Regular Expressions</h3><p><strong>Regular Expressions</strong> describe languages by an algebra. If $E$ is a regular expression, then $L(E)$ is the language it defines. The RE’s and their languages are defined recursively.<br>There are three basic operations performed on languages, union, concatenation and Kleene star. For language $L$ and $L’$, the union is the usual thing, since languages are sets. And the concatenation contains every string contanated by strings from $L$ and $L’$, which means $LL’ = \{wx| w \in L, \, x \in L’ \}$. The Kleene star of $L$ concatenates zero or more strings from $L$, or formally $L^* = \{\epsilon\} \cup L \cup LL \cup \ldots$. The RE’s definition is as follows: </p>
+<h2>Week 2 Snippets – Regular Expression and Properties of Regular Languages</h2>
+<h3>Regular Expressions</h3>
+<p><strong>Regular Expressions</strong> describe languages by an algebra. If $E$ is a regular expression, then $L(E)$ is the language it defines. The RE’s and their languages are defined recursively.<br>
+There are three basic operations performed on languages, union, concatenation and Kleene star. For language $L$ and $L’$, the union is the usual thing, since languages are sets. And the concatenation contains every string contanated by strings from $L$ and $L’$, which means $LL’ = \{wx| w \in L, , x \in L’ \}$. The Kleene star of $L$ concatenates zero or more strings from $L$, or formally $L^* = \{\epsilon\} \cup L \cup LL \cup \ldots$. The RE’s definition is as follows:</p>
 <ul>
-<li>Basis<ul>
+<li>Basis
+<ul>
 <li>If $a$ is any symbol, than $\bf{a}$ is a RE, and $L(\bf{a}) = \{a\}$</li>
 <li>$\bf{\epsilon}$ is a RE, and $L(\bf{\epsilon}) = \{\bf{\epsilon}\}$</li>
 <li>$\phi$ is a RE, and $L(\Phi) = \phi$</li>
 </ul>
 </li>
-<li>Induction<ul>
+<li>Induction
+<ul>
 <li>If $E_1$ and $E_2$ is RE, then $E_1 + E_2$ is a RE, and $L(E_1+E_2) = L(E_1)\cup L(E_2)$</li>
 <li>If $E_1$ and $E_2$ is RE, then $E_1E_2$ is a RE, and $L(E_1E_2) = L(E_1)L(E_2)$</li>
 <li>If $E$ is a RE, then $E^*$ is a RE, and $L(E^*) = (L(E))^*$</li>
 </ul>
 </li>
 </ul>
-<p>Actually, the all RE’s defined on an alphabet consist an <strong>algebra</strong>. The plus operation is union, and multiply operation is concatenation. The $\phi$ is identity for plus, $\epsilon$ is identity for multiply, and $\phi$ is annihilator for multiply.<br>It can be proved that <strong>RE and Finite Automata are equivalent</strong>. For each RE, we construct a $\epsilon$-NFA that accepts the same language as below.</p>
+<p>Actually, the all RE’s defined on an alphabet consist an <strong>algebra</strong>. The plus operation is union, and multiply operation is concatenation. The $\phi$ is identity for plus, $\epsilon$ is identity for multiply, and $\phi$ is annihilator for multiply.<br>
+It can be proved that <strong>RE and Finite Automata are equivalent</strong>. For each RE, we construct a $\epsilon$-NFA that accepts the same language as below.</p>
 <table border="0" height="150"> <tr> <th><img src="http://blog-bingh.qiniudn.com/images/automata/re2nfa_1.png"></th> <th><img src="http://blog-bingh.qiniudn.com/images/automata/re2nfa_2.png"></th> <th><img src="http://blog-bingh.qiniudn.com/images/automata/re2nfa_3.png"></th> <th><img src="http://blog-bingh.qiniudn.com/images/automata/re2nfa_4.png"></th> </tr> </table>
-
-<p>Also a finite automata (DFA) can be converted to an equivalent RE.<br><strong>Proof Sketch</strong>: Suppose states of the DFA are named $1, 2, \ldots, n$, we define a $k$-path as a path through the graph of the DFA that goes <strong>through</strong> no state numbered higher than $k$, then the union of RE’s for the $n$-paths from the start state to each final state is a RE which is equivalent to the DFA.</p>
-<h3 id="Decision_Properties_of_Regular_Languages">Decision Properties of Regular Languages</h3><p>A <strong>language class</strong> is a set of languages, a <strong>decision property</strong> for a class of languages is an algorithm that takes a formal description of a language (e.g., DFA) and tells whether or not some property holds. We might want a “smallest” representation for a language, e.g., a minimum-state DFA or a shortest RE. Then we have to be able to decide “Are these two languages the same?”. Some examples are listed below,</p>
+<p>Also a finite automata (DFA) can be converted to an equivalent RE.<br>
+<strong>Proof Sketch</strong>: Suppose states of the DFA are named $1, 2, \ldots, n$, we define a $k$-path as a path through the graph of the DFA that goes <strong>through</strong> no state numbered higher than $k$, then the union of RE’s for the $n$-paths from the start state to each final state is a RE which is equivalent to the DFA.</p>
+<h3>Decision Properties of Regular Languages</h3>
+<p>A <strong>language class</strong> is a set of languages, a <strong>decision property</strong> for a class of languages is an algorithm that takes a formal description of a language (e.g., DFA) and tells whether or not some property holds. We might want a “smallest” representation for a language, e.g., a minimum-state DFA or a shortest RE. Then we have to be able to decide “Are these two languages the same?”. Some examples are listed below,</p>
 <ul>
 <li>The Membership Problem: “Is string $w$ in regular language $L$?”. Suppose $L$ is represented by a DFA $A$, then we can simulate the action of $A$ on the sequence of input symbols forming $w$.</li>
 <li>The Emptiness Problem: “Given a regular language, does the language contain any string at all?” Assume representation is DFA, then the set of states reachable from the start state can be computed, if at least one final state is reachable, then yes, else no.</li>
-<li>The Infiniteness Problem: “Is a given regular language infinite?” The conclusion is that we can test for membership all strings of length between $n$ and $2n-1$ ($n$ is number of states), if any are accepted, then infinite, else finite. This follows from the key idea that if the language contains any string of length $n$ or more, then the language is infinite, otherwise the language is finite and that if there is a string of length $\geq n$ in $L$ (the DFA representation), then there is a string of length between $n$ and $2n-1$. The former is intuitive, since there must be a state that appear twice on the path labeled $w$ from start state to final state, where $w$ is a string with length $\geq n$. The latter follows from that we can shorten the string by remove the cycles on the path.<br>However, it’s terrible to test all $n^{|alphabet|}$ strings. As an alternative, we can find cycles between the start and a final state.<ul>
+<li>The Infiniteness Problem: “Is a given regular language infinite?” The conclusion is that we can test for membership all strings of length between $n$ and $2n-1$ ($n$ is number of states), if any are accepted, then infinite, else finite. This follows from the key idea that if the language contains any string of length $n$ or more, then the language is infinite, otherwise the language is finite and that if there is a string of length $\geq n$ in $L$ (the DFA representation), then there is a string of length between $n$ and $2n-1$. The former is intuitive, since there must be a state that appear twice on the path labeled $w$ from start state to final state, where $w$ is a string with length $\geq n$. The latter follows from that we can shorten the string by remove the cycles on the path.<br>
+However, it’s terrible to test all $n^{|alphabet|}$ strings. As an alternative, we can find cycles between the start and a final state.
+<ul>
 <li>Eliminate states not reachable from the start state</li>
 <li>Eliminate states that do not reach a final state</li>
 <li>Test if the remaining transition grph has any cycles.</li>
@@ -247,12 +256,15 @@
 <li>Equivalence: “Given regular languages $L$ and $M$, is $L=M$?” Algorithm involves constructing the <strong>product DFA</strong> from DFA of $L$ and $M$. Let these DFA’s have sets of states $Q$ and $R$, respectively, product DFA has set of states $Q\times R$, start state $[q_0, r_0]$, and transitions $\delta([q, r], a)=[\delta_L(q, a), \delta_M(r, a)]$. The final states of the product DFA are those states such that exactly one of $q$ and $r$ is a final state of its own DFA. Thus, the product DFA accepts $w$ iff $w$ is in exactly one of $L$ and $M$ and $L=M$ if and only if the product automaton’s language is empty.</li>
 <li>Containment: “Given regular languages $L$ and $M$, is $L \subset M$?” The algorithm also uses the product DFA, except that the $[q, r]$ is a final state iff $q$ is final and $r$ is not.</li>
 </ul>
-<h4 id="The_Pumping_Lemma">The Pumping Lemma</h4><p>In the infiniteness problem, we have, almost accidentally, proved a statement that is quite useful for showing certain languages are not regular, which is called as <strong>the pumping lemma for regular language</strong>.</p>
+<h4>The Pumping Lemma</h4>
+<p>In the infiniteness problem, we have, almost accidentally, proved a statement that is quite useful for showing certain languages are not regular, which is called as <strong>the pumping lemma for regular language</strong>.</p>
 <blockquote>
 <p>For every regular language $L$, there is an integer $n$, such that for every string $w$ in $L$ of length $\geq n$, we can write write $w=xyz$ such that $|xy| \leq n, |y| &gt; 0$ and for all $i\geq 0, xy^iz$ is in $L$.</p>
 </blockquote>
-<p>Examples: $\{0^k1^k|\, k\geq 1\}$ is not a regular language.<br><strong>Proof Sketch</strong>:Suppose it were, then there would be an associated $n$ for pumping lemma, let $w=0^n1^n$, we can write $w=xyz$, where $x$ and $y$ consists of 0’s, and $y\neq \epsilon$, but then $xyyz$ would be in $L$, and this string contains more 0’s than 1’s.</p>
-<h4 id="The_Minimum-State_DFA_for_a_Regular_Language">The Minimum-State DFA for a Regular Language</h4><p>Naturally, we may want to construct “smallest” representation for a regular language, either with minimum-state DFA or shortest RE. In principle, since we can test equivalence of DFA, we can find the DFA with the fewest states that accepts the same regular language. That’s a rather terrible algorithm. The efficient algorithm is listed as follows,</p>
+<p>Examples: $\{0^k1^k|\, k\geq 1\}$ is not a regular language.<br>
+<strong>Proof Sketch</strong>:Suppose it were, then there would be an associated $n$ for pumping lemma, let $w=0^n1^n$, we can write $w=xyz$, where $x$ and $y$ consists of 0’s, and $y\neq \epsilon$, but then $xyyz$ would be in $L$, and this string contains more 0’s than 1’s.</p>
+<h4>The Minimum-State DFA for a Regular Language</h4>
+<p>Naturally, we may want to construct “smallest” representation for a regular language, either with minimum-state DFA or shortest RE. In principle, since we can test equivalence of DFA, we can find the DFA with the fewest states that accepts the same regular language. That’s a rather terrible algorithm. The efficient algorithm is listed as follows,</p>
 <ul>
 <li>Construct a table with all pairs of states, mark pairs with exactly one final state,</li>
 <li>Mark $[q, r]$ if for some input symbol $a$, $[\delta(q, a), \delta(r, a)]$ is marked,</li>
@@ -265,7 +277,8 @@
 <li>For any symbol $a$, $p$ and $q$ transite to indistinguishable states.</li>
 </ul>
 <p>The algorithm recursively marks <strong>distinguishable</strong> states, and replaces <strong>indistinguishable</strong> states with a single state. It can be proved that resulting DFA has fewest states. Suppose $A$ is the resulting DFA, and there exists another smaller equivalent DFA $B$, consider an automaton with the states of $A$ and $B$ combined. Then every state of $A$ is indistinguishable from some state of $B$, which means $B$ has at least as many states as $A$.</p>
-<h3 id="Closure_Properties_of_Regular_Languages">Closure Properties of Regular Languages</h3><p>The regular language class is closed under union, concatenation, Kleene star, intersection, difference, complementation, reversal, homomorphism and inverse homomorphism. In other words, if $L$ and $M$ are regular languages, so is $L\cup M$, $L\cap M$, $L-M$, $L^*$, $LM$, $\Sigma^* - L$.</p>
+<h3>Closure Properties of Regular Languages</h3>
+<p>The regular language class is closed under union, concatenation, Kleene star, intersection, difference, complementation, reversal, homomorphism and inverse homomorphism. In other words, if $L$ and $M$ are regular languages, so is $L\cup M$, $L\cap M$, $L-M$, $L^*$, $LM$, $\Sigma^* - L$.</p>
 <ul>
 <li>Reversal: The reversal of $L$ consists of reversal of every string in $L$. The proof is completed by provide a regular expression for $L^R$, which is got by reversing the regular expression of $L$.</li>
 <li>Homomorphism: A homomorphism $h$ on an alphabet is a function that gives a string for each symbol in that alphabet. The homomorphism can be extended to map on strings. For a regular language $L$, $h(L)=\{h(w)| \, w \in L \}$ is also a regular language. The proof also follows from homomorphism of regular expression.</li>
@@ -362,21 +375,21 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">6</span>
+              <span class="site-state-item-count">7</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
 
           <div class="site-state-item site-state-categories">
             
-              <span class="site-state-item-count">5</span>
+              <span class="site-state-item-count">4</span>
               <span class="site-state-item-name">categories</span>
               
           </div>
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">12</span>
+              <span class="site-state-item-count">10</span>
               <span class="site-state-item-name">tags</span>
               </a>
           </div>
@@ -404,7 +417,7 @@
           <div class="post-toc">
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Week_2_Snippets_–_Regular_Expression_and_Properties_of_Regular_Languages"><span class="nav-number">1.</span> <span class="nav-text">Week 2 Snippets – Regular Expression and Properties of Regular Languages</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Regular_Expressions"><span class="nav-number">1.1.</span> <span class="nav-text">Regular Expressions</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Decision_Properties_of_Regular_Languages"><span class="nav-number">1.2.</span> <span class="nav-text">Decision Properties of Regular Languages</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#The_Pumping_Lemma"><span class="nav-number">1.2.1.</span> <span class="nav-text">The Pumping Lemma</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#The_Minimum-State_DFA_for_a_Regular_Language"><span class="nav-number">1.2.2.</span> <span class="nav-text">The Minimum-State DFA for a Regular Language</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Closure_Properties_of_Regular_Languages"><span class="nav-number">1.3.</span> <span class="nav-text">Closure Properties of Regular Languages</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">Week 2 Snippets – Regular Expression and Properties of Regular Languages</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.1.</span> <span class="nav-text">Regular Expressions</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.2.</span> <span class="nav-text">Decision Properties of Regular Languages</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">1.2.1.</span> <span class="nav-text">The Pumping Lemma</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">1.2.2.</span> <span class="nav-text">The Minimum-State DFA for a Regular Language</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.3.</span> <span class="nav-text">Closure Properties of Regular Languages</span></a></li></ol></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator"></div>
@@ -421,7 +434,7 @@
       <div class="footer-inner"> <div class="copyright" >
   
   &copy; &nbsp; 
-  <span itemprop="copyrightYear">2015</span>
+  <span itemprop="copyrightYear">2017</span>
   <span class="with-love">
     <i class="icon-next-heart"></i>
   </span>

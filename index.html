@@ -160,8 +160,8 @@
           
           
             
-              <a class="post-title-link" href="/2015/10/19/Notes-on-Convex-Optimization-2-Local-Methods-Especially-First-Order-Methods/" itemprop="url">
-                Notes on Convex Optimization(2): Local Methods, Especially First-Order Methods
+              <a class="post-title-link" href="/2017/06/08/Stochastic-Variance-Reduced-Gradient-SVRG/" itemprop="url">
+                Stochastic Variance Reduced Gradient (SVRG)
               </a>
             
           
@@ -171,8 +171,8 @@
       <div class="post-meta">
         <span class="post-time">
           Posted on
-          <time itemprop="dateCreated" datetime="2015-10-19T09:49:58+08:00" content="2015-10-19">
-            2015-10-19
+          <time itemprop="dateCreated" datetime="2017-06-08T16:35:16-04:00" content="2017-06-08">
+            2017-06-08
           </time>
         </span>
 
@@ -197,8 +197,8 @@
           
             <span class="post-comments-count">
             &nbsp; | &nbsp;
-            <a href="/2015/10/19/Notes-on-Convex-Optimization-2-Local-Methods-Especially-First-Order-Methods/#comments" itemprop="discussionUrl">
-              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/10/19/Notes-on-Convex-Optimization-2-Local-Methods-Especially-First-Order-Methods/" itemprop="commentsCount"></span>
+            <a href="/2017/06/08/Stochastic-Variance-Reduced-Gradient-SVRG/#comments" itemprop="discussionUrl">
+              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/06/08/Stochastic-Variance-Reduced-Gradient-SVRG/" itemprop="commentsCount"></span>
             </a>
           </span>
           
@@ -213,10 +213,101 @@
 
       
         
-          <p>The simplest goal of general nonlinear optimization is to find a <em>local minimum</em> of a <em>differentiable</em> function. The majority of general nonlinear optimization methods are based on <em>relaxation</em>, i.e. generating decrease sequence $\{ f(x_k) \}_{k = 0}^\infty$, such that<br>$$<br>f(x_{k+1}) \leq f(x_k), ~ k = 0, 1, \cdots.<br>$$</p>
+          <p>This is a non-state-of-art read through of Stochastic Variance Reduced Gradient (SVRG) <sup class="footnote-ref"><a href="#fn1" id="fnref1">[1]</a></sup> method. Gradient descent and stochastic gradient descent (SGD) plays the most important role in optimization of machine learning problems. With large scale datasets, especially in deep learning applications, SGD and its variants maybe the only practical choice. This paper proposes to accelerate the convergence of SGD by reducing the variance of gradient, introduced by random sampling when evaluating gradient. This work has been extended to many other problems, such as non-convex optimization, sparse learning, etc. So this post is just a late bird note.</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2017/06/08/Stochastic-Variance-Reduced-Gradient-SVRG/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              <a class="post-title-link" href="/2015/10/21/Notes-on-Convex-Optimization-2-Local-Methods-Especially-First-Order-Methods/" itemprop="url">
+                Notes on Convex Optimization (2): Local Methods, Especially First-Order Methods
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          Posted on
+          <time itemprop="dateCreated" datetime="2015-10-21T11:56:51-04:00" content="2015-10-21">
+            2015-10-21
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; In
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <a href="/categories/Math/" itemprop="url" rel="index">
+                  <span itemprop="name">Math</span>
+                </a>
+              </span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2015/10/21/Notes-on-Convex-Optimization-2-Local-Methods-Especially-First-Order-Methods/#comments" itemprop="discussionUrl">
+              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/10/21/Notes-on-Convex-Optimization-2-Local-Methods-Especially-First-Order-Methods/" itemprop="commentsCount"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <p>The simplest goal of general nonlinear optimization is to find a <em>local minimum</em> of a <em>differentiable</em> function. The majority of general nonlinear optimization methods are based on <em>relaxation</em>, i.e. generating decrease sequence $\{ f(x_k) \}_{k = 0}^\infty$, such that<br>
+$$<br>
+f(x_{k+1}) \leq f(x_k), ~ k = 0, 1, \cdots.<br>
+$$</p>
 <p>To implement the idea of relaxation, we employ another fundamental principle, <em>approximation</em>. Usually, we apply <em>local approximation</em> based on derivatives of nonlinear functions. Local methods are discussed in general setting without convexity.</p>
           <div class="post-more-link text-center">
-            <a class="btn" href="/2015/10/19/Notes-on-Convex-Optimization-2-Local-Methods-Especially-First-Order-Methods/#more" rel="contents">
+            <a class="btn" href="/2015/10/21/Notes-on-Convex-Optimization-2-Local-Methods-Especially-First-Order-Methods/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -260,7 +351,7 @@
       <div class="post-meta">
         <span class="post-time">
           Posted on
-          <time itemprop="dateCreated" datetime="2015-03-17T00:12:00+08:00" content="2015-03-17">
+          <time itemprop="dateCreated" datetime="2015-03-17T00:12:00-04:00" content="2015-03-17">
             2015-03-17
           </time>
         </span>
@@ -303,7 +394,8 @@
       
         
           <p>最近开始学习凸优化，虽然作为数学系的学生曾上过数值优化课，但当时学得是“稀里糊涂”(in boss’s words)。当然以前也没有认识到数值优化的应用，现转为初级码农，从业ML，遂得知优化之实用(当然主要是每年paper无数)，重头学习凸优化。目前正在看<a href="http://www.uclouvain.be/32349.html">Yurii Nesterov</a>所编的教材的<a href="http://book.douban.com/subject/1834645/">Introductory Lectures on Convex Optimization: A Basic Course</a>，为免看完即忘，因此作了笔记。</p>
-<h2 id="What’s_in_this_book">What’s in this book</h2><ul>
+<h2>What’s in this book</h2>
+<ul>
 <li>General optimization problems (Unfortunately “unsolvable”)</li>
 <li>Smooth convex optimization</li>
 <li>Nonsmooth convex optimization</li>
@@ -359,7 +451,7 @@
       <div class="post-meta">
         <span class="post-time">
           Posted on
-          <time itemprop="dateCreated" datetime="2014-09-19T00:59:29+08:00" content="2014-09-19">
+          <time itemprop="dateCreated" datetime="2014-09-19T00:59:29-04:00" content="2014-09-19">
             2014-09-19
           </time>
         </span>
@@ -447,7 +539,7 @@
       <div class="post-meta">
         <span class="post-time">
           Posted on
-          <time itemprop="dateCreated" datetime="2014-09-08T01:19:41+08:00" content="2014-09-08">
+          <time itemprop="dateCreated" datetime="2014-09-08T01:19:41-04:00" content="2014-09-08">
             2014-09-08
           </time>
         </span>
@@ -490,24 +582,29 @@
       
         
           <p>上个学期修了计算理论课程，但结果没有去上过几次课，最后勉强没有挂科。但实际上，计算理论是CS之所以能成为科学的重要基础，也是CS中非常有趣的部分。因此选了<a href="https://www.coursera.org/">Coursera</a>的<a href="https://class.coursera.org/automata">Automata</a>课程，由Stanford的<a href="http://infolab.stanford.edu/~ullman/">Jeff Ullman</a>教授讲课。教授自然是大神，传说中的<a href="http://book.douban.com/subject/1134994/">龙书</a>（《编译原理》）的作者，当然半路出家的我并没有拜读过，不过封面真是赞啊。</p>
-<h2 id="What’s_in_this_course">What’s in this course</h2><ul>
-<li>Regular languages and their descriptors<ul>
+<h2>What’s in this course</h2>
+<ul>
+<li>Regular languages and their descriptors
+<ul>
 <li>Finite Automata, nondeterministic finite automata, regular expressions</li>
 <li>Algorithms to decide questions about regular languages, e.g., is it empty?</li>
 <li>Closure properties of regular languages</li>
 </ul>
 </li>
-<li>Context-free languages and their descriptors<ul>
+<li>Context-free languages and their descriptors
+<ul>
 <li>Context-free grammars, pushdown automata</li>
 <li>Decisions and closure properties</li>
 </ul>
 </li>
-<li>Recursive and recursively enumerable languages<ul>
+<li>Recursive and recursively enumerable languages
+<ul>
 <li>Turing machines, deciability of problems</li>
 <li>The limit of what can be computed</li>
 </ul>
 </li>
-<li>Intractable problems<ul>
+<li>Intractable problems
+<ul>
 <li>Problems that (appear to) require exponential time</li>
 <li>NP-completeness and beyond</li>
 </ul>
@@ -563,7 +660,7 @@
       <div class="post-meta">
         <span class="post-time">
           Posted on
-          <time itemprop="dateCreated" datetime="2014-08-21T11:01:25+08:00" content="2014-08-21">
+          <time itemprop="dateCreated" datetime="2014-08-21T11:01:25-04:00" content="2014-08-21">
             2014-08-21
           </time>
         </span>
@@ -629,97 +726,13 @@
 
 
     
-      
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
-            
-              <a class="post-title-link" href="/2014/07/24/Hexo-Blog-On-Openshift/" itemprop="url">
-                Hexo Blog On Openshift
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          Posted on
-          <time itemprop="dateCreated" datetime="2014-07-24T09:37:20+08:00" content="2014-07-24">
-            2014-07-24
-          </time>
-        </span>
-
-        
-          <span class="post-category" >
-            &nbsp; | &nbsp; In
-            
-              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                <a href="/categories/HowTos/" itemprop="url" rel="index">
-                  <span itemprop="name">HowTos</span>
-                </a>
-              </span>
-
-              
-              
-
-            
-          </span>
-        
-
-        
-          
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/2014/07/24/Hexo-Blog-On-Openshift/#comments" itemprop="discussionUrl">
-              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2014/07/24/Hexo-Blog-On-Openshift/" itemprop="commentsCount"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </header>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <p>This is a static blog built by <a href="http://hexo.io/">Hexo</a>, which is a simple but powerful blog framework implemented by Node.js. Actually, a hexo blog can be built with just few commands. It has <a href="http://daringfireball.net/projects/markdown/">markdown</a> support, which is also a simple but powerful mark language. Hexo and other static blog framework, such as <a href="http://jekyllrb.com/">jekyll</a>, parses posts with markdown or other render engine and generates static files (seems not only html) with beatutiful themes. The user don’t need to be an expert on web design to have a fancy indie blog. However, the most important thing for me maybe keep writting blogs.<br>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2014/07/24/Hexo-Blog-On-Openshift/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">&raquo;</a>
+  </nav>
+
  </div>
 
         
@@ -751,21 +764,21 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">6</span>
+              <span class="site-state-item-count">7</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
 
           <div class="site-state-item site-state-categories">
             
-              <span class="site-state-item-count">5</span>
+              <span class="site-state-item-count">4</span>
               <span class="site-state-item-name">categories</span>
               
           </div>
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">12</span>
+              <span class="site-state-item-count">10</span>
               <span class="site-state-item-name">tags</span>
               </a>
           </div>
@@ -799,7 +812,7 @@
       <div class="footer-inner"> <div class="copyright" >
   
   &copy; &nbsp; 
-  <span itemprop="copyrightYear">2015</span>
+  <span itemprop="copyrightYear">2017</span>
   <span class="with-love">
     <i class="icon-next-heart"></i>
   </span>
