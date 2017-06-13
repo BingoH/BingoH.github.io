@@ -1,0 +1,907 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="convex optimization," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="The simplest goal of general nonlinear optimization is to find a local minimum of a differentiable function. The majority of general nonlinear optimization methods are based on relaxation, i.e. genera">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Notes on Convex Optimization (2): Local Methods, Especially First-Order Methods">
+<meta property="og:url" content="https://bingoh.github.io/2017/06/13/Notes-on-Convex-Optimization-2-Local-Methods-Especially-First-Order-Methods/index.html">
+<meta property="og:site_name" content="Bingo.H's blog">
+<meta property="og:description" content="The simplest goal of general nonlinear optimization is to find a local minimum of a differentiable function. The majority of general nonlinear optimization methods are based on relaxation, i.e. genera">
+<meta property="og:image" content="https://bingoh.github.io/images/convxopt/grad_descent.png">
+<meta property="og:image" content="https://bingoh.github.io/images/convxopt/quasi-newton.png">
+<meta property="og:image" content="https://bingoh.github.io/images/convxopt/quasi-newton-rule.png">
+<meta property="og:image" content="https://bingoh.github.io/images/convxopt/conjugate-gradients.png">
+<meta property="og:updated_time" content="2017-06-13T19:44:14.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Notes on Convex Optimization (2): Local Methods, Especially First-Order Methods">
+<meta name="twitter:description" content="The simplest goal of general nonlinear optimization is to find a local minimum of a differentiable function. The majority of general nonlinear optimization methods are based on relaxation, i.e. genera">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://bingoh.github.io/2017/06/13/Notes-on-Convex-Optimization-2-Local-Methods-Especially-First-Order-Methods/"/>
+
+
+
+
+
+  <title>Notes on Convex Optimization (2): Local Methods, Especially First-Order Methods | Bingo.H's blog</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Bingo.H's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Don't panic!</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://bingoh.github.io/2017/06/13/Notes-on-Convex-Optimization-2-Local-Methods-Especially-First-Order-Methods/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Bingo.H">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bingo.H's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Notes on Convex Optimization (2): Local Methods, Especially First-Order Methods</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-06-13T15:44:14-04:00">
+                2017-06-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Optimization/" itemprop="url" rel="index">
+                    <span itemprop="name">Optimization</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/06/13/Notes-on-Convex-Optimization-2-Local-Methods-Especially-First-Order-Methods/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/06/13/Notes-on-Convex-Optimization-2-Local-Methods-Especially-First-Order-Methods/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>The simplest goal of general nonlinear optimization is to find a <em>local minimum</em> of a <em>differentiable</em> function. The majority of general nonlinear optimization methods are based on <em>relaxation</em>, i.e. generating decrease sequence $\{ f(x_k) \}_{k = 0}^\infty$, such that<br>
+$$<br>
+f(x_{k+1}) \leq f(x_k), ~ k = 0, 1, \cdots.<br>
+$$</p>
+<p>To implement the idea of relaxation, we employ another fundamental principle, <em>approximation</em>. Usually, we apply <em>local approximation</em> based on derivatives of nonlinear functions. Local methods are discussed in general setting without convexity.</p>
+<a id="more"></a>
+<h2>Optimality Conditions</h2>
+<ul>
+<li>First order necessary condition (Fermat’s theorem)</li>
+<li>Second order necessary condition</li>
+<li>Second order sufficient condition</li>
+</ul>
+<h2>Gradient Method</h2>
+<p>For unconstrained differentiable problems, it can be verified that the <em>antigradient</em> is a <em>locally steepest</em> descent direction, thus gradient method makes move in the antigradient direction.<br>
+<img src="/images/convxopt/grad_descent.png" alt="Gradient Method"><br>
+The step size $h_k$ can be chosen</p>
+<ul>
+<li>as constant or decrease over iteration (mainly in convex optimization)</li>
+<li>by optimize a one dimensional problem (completely theoretical)<br>
+$ h_k = \arg \min_{h \geq 0} f(x_k - hf’(x_k))$</li>
+<li>by Goldstein-Armijo rule (commonly used in practical algorithms). Find $x_{k+1} = x_k - hf’(x_k)$, such that<br>
+$ \alpha \langle f’(x_k), x_k - x_{k+1} \rangle \leq f(x_k) - f(x_{k+1}) $,<br>
+$ \beta  \langle f’(x_k), x_k - x_{k+1} \rangle \geq f(x_k) - f(x_{k+1}) $ <br> Denote $\phi(h) = f(x - hf’(x)), ~ h \geq 0$, then the step-size acceptable belong to that part of the graph of $\phi$ that is located between two linear functions:<br>
+$ \phi_1(h) = f(x) - \alpha h \| f’(x) \|^2, \quad \phi_2(h) = f(x) - \beta h \| f’(x) \|^2 $ <br> If $\phi(h)$ is bounded below, there exists acceptable step-size.</li>
+</ul>
+<h3>Convergence Analysis</h3>
+<h4>General Lipschitz continuous objective</h4>
+<p>For unconstrained problem with $f(x) \in C_L^{1, 1}(\mathbb{R}^n)$ and bounded below, we have<br>
+$$<br>
+f(x_k) - f(x_{k+1}) \leq \frac{\omega}{L}|f’(x_k)|^2<br>
+$$<br>
+for some positive constant $\omega$. That leads to $O(\frac{1}{\sqrt(N)})$ <em>convergence rate</em> of $ g_N^* = \min_{0 \leq k \leq N} \| f’(x_k) \| $, which comes from the following result,<br>
+$$<br>
+g_N^* \leq \frac{1}{\sqrt{N+1}} \left[ \frac{1}{\omega} L(f(x_0) - f^*)\right]^{1/2},<br>
+$$<br>
+where $f^*$ is the optimal value.</p>
+<p>However, we cannot say anything about the rate of convergence of sequences $ \{ f(x_k)\}$ and $\{ x_k\}$. An counterexample, is the following function of two variables:<br>
+$$<br>
+f(x) = \frac{1}{2} x_1^2 + \frac{1}{4} x_2^4 - \frac{1}{2}x_2^2<br>
+$$<br>
+If we start gradient descent from $x_0 = (1, 0)$, we will only get a <em>stationary point</em> $x_1^* = (0, 0)$, since $\frac{\partial f}{\partial x_1}$is always zero.</p>
+<h4>Linear convergence</h4>
+<p>If the objective satisfies the following assumptions:</p>
+<ul>
+<li>$f \in C_M^{2, 2}(\mathbb{R}^n)$</li>
+<li>there exists a local minimum at which the Hessian is positive definite</li>
+<li>we know some bounds $0 &lt; l \leq L &lt; \infty$ for the Hessian at $x^*$<br>
+$ l I_n \preceq f’’(x^*) \preceq LI_n $</li>
+<li>the starting point $x_0$ is close enough to $x^*$, i.e,<br>
+$r_0 = \| x_0 - x^* \| &lt; \bar{r} = \frac{2l}{M}$</li>
+</ul>
+<p>then the gradient descent method with step size $h_k = \frac{2}{L+l}$ leads to a <em>linear convergence rate</em>,<br>
+$$<br>
+\| x_k - x^* \| \leq \frac{\bar{r} r_0}{\bar{r}-r_0} \left( 1 - \frac{2l}{L+3l} \right)^k<br>
+$$</p>
+<h2>Newton Method</h2>
+<p>The Newton method for optimization problems generates points with the following update rule,<br>
+$$<br>
+x_{k+1} = x_k - [f’’(x_k)]^{-1} f’(x_k).<br>
+$$<br>
+It can be obtained by</p>
+<ul>
+<li>Minimizing the quadratic approximation of the objective, computed w.r.t. point $x_k$, $\phi(x) = f(x_k) + \langle f’(x_k), x - x_k \rangle + \frac{1}{2} \langle f’’(x_k)(x- x_k), x - x_k\rangle$</li>
+<li>Finding the roots of the nonlinear system $f’(x) = 0$ via <em>Newton method</em>.</li>
+</ul>
+<p>Newton method converges very fast. Actually, if the objective satisfies the following conditions</p>
+<ul>
+<li>$f \in C_M^{2, 2}(\mathbb{R}^n)$</li>
+<li>There exists a local minimum with positive definite Hessian: $f’’(x^*) \succeq lI_n, ~ l &gt; 0$</li>
+<li>The starting point $x_0$ is close enough to $x^*$, i.e., $\|x_0 - x^* \| &lt; \bar{r} = \frac{2l}{3M}$</li>
+</ul>
+<p>the Newton method converges quadratically:<br>
+$$<br>
+\|x_{k+1} - x^* \| \leq \frac{M \|x_k - x^* \|^2}{2 (l-M\|x_k - x^* \|)}<br>
+$$</p>
+<p>Surprisingly, the <em>region of quadratic convergence</em> of the Newton method is almost the same as the region of linear convergence of the gradient method. Overall, it is recommended to use gradient method at the initial stage of the minimization process to get close to a local minimum, and perform the final job by Newton method.</p>
+<h2>Quasi-Newton Methods</h2>
+<p>Fix some $\bar{x} \in \mathbb{R}^n$, the gradient method can be obtained by considering the following approximation,<br>
+$$<br>
+\phi_1(x) = f(\bar{x}) + \langle f’(\bar{x}), x - \bar{x} \rangle + \frac{1}{2h} \|x - \bar{x} \|^2,<br>
+$$<br>
+which is a $global upper$ approximation, if $h \in (0, \frac{1}{L}]$. And the Newton method is formulated from the quadratic approximation,<br>
+$$<br>
+\phi_2(x) = f(\bar{x}) + \langle f’(\bar{x}), x - \bar{x} \rangle + \frac{1}{2} \langle f’’(\bar{x})(x - \bar{x}), x - \bar{x} \rangle,<br>
+$$<br>
+this motivates us to use approximation better than $\phi_1(x)$ while less expensive than $\phi_2(x)$:<br>
+$$<br>
+\phi_G(x) = f(\bar{x}) + \langle f’(\bar{x}), x - \bar{x} \rangle + \frac{1}{2} \langle G(x - \bar{x}), x - \bar{x} \rangle,<br>
+$$<br>
+which leads to <em>quasi-Newton methods</em> (also <em>variable metric methods</em>). To be specific, these methods form a sequence of matrices $ \{ G_k \}: ;  G_k \rightarrow f’’(x^*)$<br>
+(or $\{ H_k \}: ; H_k \rightarrow [f’’(x_k)]^{-1}$), and update the solution with<br>
+$$<br>
+x_{k+1} = x_k - G_k^{-1} f’(x_k)<br>
+$$<br>
+(or $x_{k+1} = x_k - H_k f’(x_k)$ ). Only the gradients are involved in the process of generating sequence $\{ G_k \}$ or $\{ H_k \}$.<br>
+<img src="/images/convxopt/quasi-newton.png" alt="Quasi-Newton Methods"></p>
+<p>Justified by the property of quadratic funcion $f(x) = \alpha + \langle a, x \rangle + \frac{1}{2} \langle Ax, x \rangle$,<br>
+$$<br>
+f’(x) - f’(y) = A(x-y), \  \forall x, y,<br>
+$$<br>
+the quasi-Newton rule is proposed:<br>
+<img src="/images/convxopt/quasi-newton-rule.png" alt=""><br>
+There are many ways to satisfy the rule, which lead to various quasi-Newton methods, such as <a href="https://en.wikipedia.org/wiki/Broyden%E2%80%93Fletcher%E2%80%93Goldfarb%E2%80%93Shanno_algorithm" target="_blank" rel="external">BFGS</a>, <a href="https://en.wikipedia.org/wiki/Davidon%E2%80%93Fletcher%E2%80%93Powell_formula" target="_blank" rel="external">DFP</a>.</p>
+<h3>Convergence Rate</h3>
+<ul>
+<li>In a neighbourhood of strict minimum, quasi-Newton methods have a <em>superlinear</em> rate of convergence: for any $x_0$ there exists a number $N$ such that for all $k \geq N$, we have $\| x_{k+1} - x^* \| \leq  \text{const} \cdot  \| x_k - x^* \| \cdot \| x_{k-n} - x^* \| $;</li>
+<li>For global convergence, these methods are not better than the gradient method (at least from the theoretical point of view).</li>
+</ul>
+<h2>Conjugate gradient method</h2>
+<p>The conjugate gradients methods are initially proposed for minimizing a quadratic function,<br>
+$$<br>
+\min_{x \in \mathcal{R}^n} f(x) = \min_{x \in \mathcal{R}^n} \alpha + \langle a, x \rangle + \frac{1}{2} \langle Ax, x \rangle,<br>
+$$<br>
+with $A = A^T \succ 0$. It is obvious that the problem statisfies</p>
+<ul>
+<li>the solution of this problem is $x^* = -A^{-1} a$ and $f^* = \alpha - \frac{1}{2} \langle Ax^*, x^* \rangle $</li>
+<li>the gradient $f’(x) = A(x-x^*)$</li>
+</ul>
+<p>The conjugate gradients consider the <em>Krylov</em> subspaces,<br>
+$$<br>
+\mathcal{L}_k = \text{Lin}\{A(x_0 - x^*), \ldots, A^k(x_0 -x^*)\}, \ k \geq 1,<br>
+$$<br>
+and theoretically genrate the sequence of points with<br>
+$$<br>
+x_k  = \arg \min \left\{ f(x) , | , x \in x_0 + \mathcal{L}_k \right\}, \ k \geq 1.<br>
+$$<br>
+This definition is only used for theoretical analysis. For quadratic objective, we have</p>
+<ul>
+<li>$\mathcal{L}_k = \text{Lin }\{f’(x_0), \ldots, f’(x_{k-1})\} = \text{Lin }\{ \delta_0, \ldots, \delta_{k-1} \}$,where $\delta_i = x_{i+1} - x_i$</li>
+<li>for any $k, i \geq 0$, we have $\langle f’(x_k), f’(x_i) \rangle = 0$, if $k \neq i$</li>
+<li>for any $k, i \geq 0$, we have $\langle A\delta_k, \delta_i \rangle = 0$<br>
+The second property indicates that we have the solution after $n$ steps, since the number of orthogonal directions in $\mathcal{R}^n$ cannot exceed $n$. The last property explains the name of the method.</li>
+</ul>
+<p>The general scheme of conjugate gradients (for minimizing a nonlinear function) :<br>
+<img src="/images/convxopt/conjugate-gradients.png" alt="Conjugate Gradients"><br>
+There are different formulas for coefficient $\beta_k$, all of them lead to the same result for quadratic functions. In general nonlinear case, they generate different sequences.</p>
+<h3>Convergence Rate</h3>
+<ul>
+<li><em>Restarting</em>: the conjugate gradients terminate in $n$ iterations (or less), for quadratic objectives. However, for general nonlinear case, the conjugate directions lose any interpretation after $n$ iterations. Thus, in all practical schemes, at some moment we sets $\beta_k = 0$ (usually after every $n$ iterations).</li>
+<li>In a neighborhood of a strict minimum, the conjugate gradients schemes have a local $n$-step quadratic convergence: $\|x_{n+1} - x^* \| \leq \text{const} \cdot \|x_0 - x^* \|^2$</li>
+<li>When it comes to global convergence, the conjugate gradients are not better than the gradient method.</li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/convex-optimization/" rel="tag"># convex optimization</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/06/13/Notes-on-Convex-Optimization-3-Optimal-Method-for-Smooth-Convex-Optimization/" rel="next" title="Notes on Convex Optimization (3): Optimal Method for Smooth Convex Optimization">
+                <i class="fa fa-chevron-left"></i> Notes on Convex Optimization (3): Optimal Method for Smooth Convex Optimization
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="Bingo.H" />
+          <p class="site-author-name" itemprop="name">Bingo.H</p>
+           
+              <p class="site-description motion-element" itemprop="description">Bingo.H's blog</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">categories</span>
+              
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-name">tags</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">Optimality Conditions</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">2.</span> <span class="nav-text">Gradient Method</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.1.</span> <span class="nav-text">Convergence Analysis</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">2.1.1.</span> <span class="nav-text">General Lipschitz continuous objective</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">2.1.2.</span> <span class="nav-text">Linear convergence</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">3.</span> <span class="nav-text">Newton Method</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">4.</span> <span class="nav-text">Quasi-Newton Methods</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">4.1.</span> <span class="nav-text">Convergence Rate</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">5.</span> <span class="nav-text">Conjugate gradient method</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">5.1.</span> <span class="nav-text">Convergence Rate</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Bingo.H</span>
+</div>
+
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://BingoH.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'https://bingoh.github.io/2017/06/13/Notes-on-Convex-Optimization-2-Local-Methods-Especially-First-Order-Methods/';
+          this.page.identifier = '2017/06/13/Notes-on-Convex-Optimization-2-Local-Methods-Especially-First-Order-Methods/';
+          this.page.title = 'Notes on Convex Optimization (2): Local Methods, Especially First-Order Methods';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://BingoH.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>
